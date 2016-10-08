@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Commuter Map</title>
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "A map of commuter origins and destinations in LA County">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBIWsfuV8ADzuBaYMbaPNaPJLJj3mHv5tM"></script>
+    <script src="./map.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+		    loadCommuteMap();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's LA Commuter Map</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Los Angeles County Commute Origin-Destination Map</h2>
+        <p>
+          I was working on this during September 1-7, 2016.  This map shows commuting origins (homes) and destinations (jobs) in Los Angeles County.  Commutes are counted per census tract.
+        </p>
+
+		    <div id="map_canvas" style="width: 100%; height: 500px;"></div>
+
+        <p>
+        The brighter the red, the more commuter destinations (jobs, roughly) per unit of area .
+        The brighter the green, the more commuter origins (homes, roughly) per unit of area.  Red and green make yellow, so bright yellow means lots of both origins and destinations.
+        </p>
+      </section>
+      <section title="Motivation" id="secMotivation">
+        <h3>Motivation</h3>
+
+        <p>
+          Originally I wanted to make a transit desert map.  The idea was that I would find all the commutes in LA county, ask Google how long they took on transit, then make a map about which areas had the worst transit commutes.  However, there are about 1,000,000 origin-destination pairs, which is too many to ask Google about.
+        </p>
+        <p>
+          I thought that maybe I could compute the transit commute durations myself.  I had hoped to run a graph distance algorithm to get the travel times between different locations.  I ended up looking at LA Metro's GTFS (General Transit Feed Specification) files and did end up loading all the ~11,000 transit stop locations into a searchable graph.  That was pretty fun and successful.  However, when I tried to load all of the ~3,000,000 daily individual times that buses / trains stop throughout the day through the system, my computer crashed.  Maybe I'll try to make the graph structure more lightweight and try it again in the future...
+        </p>
+        <p>
+          I ended up setting for a map of just the sum totals of origins and destinations per tract, which was pretty low hanging fruit.
+        </p>
+      </section>
+      <section title="Resources" id="secSources">
+        <h3>Resources</h3>
+
+        <ul>
+          <li>
+            The <a href="http://developer.metro.net/">LA Metro</a> site has nice stuff, including scheules, real time data, GIS data, etc.
+          </li>
+          <li>
+            The <a href="http://www.census.gov/">US Census Site</a> has all kinds of information, including:
+            <ul>
+              <li><a href="https://catalog.data.gov/dataset/census-tracts-2010-799a3/resource/513f1136-bea2-4094-be1d-6eae2943d96e">a 2010 Census tract general info csv</a></li>
+              <li><a href="https://www.census.gov/geo/maps-data/data/tiger-line.html">2010 Census tract shape files</a></li>
+              <li><a href="http://lehd.ces.census.gov/data/">Commuting Data</a></li>
+            </ul>
+          </li>
+          <li>
+            I used <a href="http://www.qgis.org/en/site/">QGIS</a>, a free GIS program, to convert the shape files to something that I would process more easily.
+          </li>
+          <li>
+            I used the python package <a href="https://pypi.python.org/pypi/gmplot/1.0.5">gmplot</a> by Michael Woods to dump the data out to Javascript / HTML so that people can actually see it.
+          </li>
+        </ul>
+      </section>
+      <section title="Assumptions" id="secAssumptions">
+        <h3>Assumptions / Simplifications</h3>
+
+        <ul>
+          <li>
+            I dumped every census tract that wasn't contiguous.  (Don't have contiguous parts?)  That just made it easier parse and write everything.  There were only three or so.
+          </li>
+          <li>
+            I totally discounted any commutes that either started or ended outside of LA county.  This is kind of a problem because LA County bleeds into the surrounding counties, especially Orange and San Bernadino County.  There are a _lot_ of cross county commutes.
+          </li>
+        </ul>
+      </section>
+      <section title="Process" id="secProcess">
+        <h3>Process</h3>
+
+        <ul>
+          <li>
+            I got the commuter files from the census site.  I used grep to filter out the origin-destination pairs entirely within LA County (06037 for lyfe), then used python to sum the trips up per tract.
+          </li>
+          <li>
+            I opened the *.shp file with QGIS and dumped it to *.geojson so it'd be a little easier to parse.
+          </li>
+          <li>
+            I used python to make three dictionaries:
+            <ul>
+              <li>
+                tracts --> commute origin counts
+              </li>
+              <li>
+                tracts --> commute destination counts
+              </li>
+              <li>
+                tracts --> paths  / tract shapes from the *.geojson file
+              </li>
+            </ul>
+            I merged these and dumped the data to a CSV file.
+          </li>
+          <li>
+            I then used Python and the gmplot package to write that information to a html file containing a map.  I stripped that file down to the Javascript and included that Javascript in the file you're currently reading.
+          </ul>
+        </ul>
+      </section>
+      <section title="Problems / Future Work" id="secProblems">
+        <h3>Problems</h3>
+
+        <ul>
+          <li>
+            I counted only about 3.4 million commutes, when there should be around 5 million commutes.  (LA County, the largest in the nation, has about 10 million residents.)  This is problably due to the nixing of cross-county commutes and possibly also imperfect census data.
+          </li>
+          <li>
+            I capped the density coloring at 2000 commutes per square kilometer.  That is, the colors don't get any more intense if the density rises above 2000 commutes per km^2.
+          </li>
+          <li>
+            I think I might have to write a custom javascript / Goole Maps dumper.
+            <ul>
+              <li>
+                I'd really like to include tool tips / pop ups so that if you click on a tract, the number of origins, number of destinations, and densities show up.
+              </li>
+              <li>
+                The Javascript file with the map is about 14 MB.  That's huge.  I think I could trip it down with a custom file.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Obviously, I'd like to take transit routes into account, as noted above.  I'll have to make my graph more lightweight so that I can actually load them all.  Or, alternately, I'll have to figure out how to run graph algorithms on graphs that don't fit into memory.
+          </li>
+        </ul>
+      </section>
+      <section title="Conclusion" id="secConclusions">
+        <h3>Conclusions</h3>
+
+        <p>
+          The map turned out more or less how I expected it to.  It really helps show where the jobs and homes are.  Some highlights:
+          <ul>
+            <li>
+              There is a large concentration of both jobs and homes in the so-called <a href="http://dornsife.usc.edu/assets/sites/1/docs/news_events/2012/Krueger_WilshireSantaMonicaCorridor_Poster.pdf">Wilshire-Santa Monica Corridor</a>, as both experience and authority would tell me.
+            </li>
+            <li>
+              You can really see the industrial zones to the southeast of downtown Los Angeles and down south of LAX.
+            </li>
+            <li>
+              The mountains really come out strongly in black.
+            </li>
+          </ul>
+        </p>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>
