@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Commuter Map</title>
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "A map of commuter origins and destinations in LA County">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <script type="text/javascript" src="scripts/tracts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBIWsfuV8ADzuBaYMbaPNaPJLJj3mHv5tM"></script>
+    <script type="text/javascript" src="scripts/mapUtils.js"></script>
+    <script type="text/javascript" src="scripts/mapFunctions.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+		    initMap();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's LA Commuter Map</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+
+    <main style="width: 100%">
+	<div id="map_canvas" style="width: 100%; height: 80vh;"></div>
+	<div style="text-align:center"> <a href="index.html">Return to description page.</a> </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
