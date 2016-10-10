@@ -43,8 +43,14 @@ function paintTracts(map, tracts) {
 			var message = "<table>";
 			message += makeTableRow("Tract", tract, true);
 			message += makeTableRow("Area", area.toFixed(3) + " sq km");
-			message += makeTableRow("Origins", origins + " (" + origDens.toFixed(1) + " / sq km)");
-			message += makeTableRow("Dests", dests + " (" + destDens.toFixed(1) + " / sq km)");
+			if (area > 0) {
+				message += makeTableRow("Origins", origins + " (" + origDens.toFixed(1) + " / sq km)");
+				message += makeTableRow("Dests", dests + " (" + destDens.toFixed(1) + " / sq km)");
+			} else {
+				message += makeTableRow("Origins", origins)");
+				message += makeTableRow("Dests", dests);
+			}
+
 			message += "</table>"
 			addPolygon(map, path, color, message);
 		}
