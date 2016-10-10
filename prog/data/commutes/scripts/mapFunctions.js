@@ -33,8 +33,10 @@ function paintTracts(map, tracts) {
 		// convert from sq m to sq km
 		var area = tracts[tract]["area"] / 1000000;
 		var dests = tracts[tract]["dests"];
-		var destDens = dests / area;
 		var origins = tracts[tract]["origs"];
+		if (typeof dests == 'undefined') dests = 0;
+		if (typeof origins == 'undefined') origins = 0;
+		var destDens = dests / area;
 		var origDens = origins / area;
 		var paths = tracts[tract]["paths"];
 		var color = getColor(origDens, destDens)
@@ -42,13 +44,13 @@ function paintTracts(map, tracts) {
 			path = paths[i];
 			var message = "<table>";
 			message += makeTableRow("Tract", tract, true);
-			message += makeTableRow("Area", area.toFixed(3) + " sq km");
+			message += makeTableRow("Land Area", area.toFixed(2) + " sq km");
 			if (area > 0) {
-				message += makeTableRow("Origins", origins + " (" + origDens.toFixed(1) + " / sq km)");
-				message += makeTableRow("Dests", dests + " (" + destDens.toFixed(1) + " / sq km)");
+				message += makeTableRow("Origins", origins.toLocaleString() + " (" + origDens.toFixed(1) + " / sq km)");
+				message += makeTableRow("Dests", dests.toLocaleString() + " (" + destDens.toFixed(1) + " / sq km)");
 			} else {
-				message += makeTableRow("Origins", origins)");
-				message += makeTableRow("Dests", dests);
+				message += makeTableRow("Origins", origins.toLocaleString());
+				message += makeTableRow("Dests", dests.toLocaleString());
 			}
 
 			message += "</table>"
