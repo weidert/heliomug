@@ -3,7 +3,8 @@ function getDensityCeiling() { return 3000; }
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map_canvas'), {
 		center: {lat: 34.064030, lng: -118.358800},
-		zoom: 11
+		zoom: 11,
+		mapTypeId: 'terrain'
 	});
 
 	addLegend(map, makeLegend());
