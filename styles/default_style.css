@@ -83,7 +83,7 @@ main > div {
 	margin: auto;
 }
 
-table {
+table.fancy {
 	border: 3px solid #000;
 	border-radius: 3px;
 	border-collapse: collapse;
@@ -91,8 +91,11 @@ table {
 	background-color: #fff;
 	margin: auto;
 }
-
-th, td {
+table.fancy th {
+	border: 1px solid #888;
+	text-align: center;
+}
+table.fancy td {
 	border: 1px solid #888;
 	text-align: center;
 }
@@ -148,6 +151,13 @@ img {
 }
 
 .right * {
+	text-align: right;
+}
+
+.leftJust {
+	text-align: left;
+}
+.rightJust {
 	text-align: right;
 }
 
