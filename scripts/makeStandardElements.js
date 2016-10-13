@@ -40,7 +40,7 @@ function makeSiteNav() {
   if ($("#siteNav").length > 0) {
     var navString = "<ul>";
     navString += '<li><a href="http://heliomug.com">Home</a></li>';
-    navString += '<li><a href="http://heliomug.com/caller">Caller</a>';
+    navString += '<li><a href="http://heliomug.com/caller/caller_description.html">Caller</a>';
     navString += '<li><a href="http://heliomug.com/prog/java">Programs</a></li>';
     navString += '<li><a href="http://heliomug.com/prog/python/index.html">Machine Learning</a></li>';
     navString += '<li><a href="http://heliomug.com/prog/data">Data Vis</a></li>';
