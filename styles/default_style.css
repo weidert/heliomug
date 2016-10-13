@@ -120,24 +120,14 @@ img {
 }
 
 .captioned {
-	width: 240px;
+	width: 100%;
 	border: 5px solid #fff;
 }
 
-.picAndCap {
-	width: 100%;
-}
+.picAndCap { width: 100%; }
+.picAndCap .capPic { float: right;	width: 40%; }
+.picAndCap .caption { float: left;	width: 55%; margin-right: 5%; }
 
-.capPic {
-	float: right;
-	width: 40%;
-}
-
-.caption {
-	float: left;
-	width: 55%;
-	margin-right: 5%;
-}
 
 .padLeft {
 	margin-left: 170px;
