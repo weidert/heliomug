@@ -18,97 +18,27 @@
 
   <body>
     <header>
-      <h1>Craig's Machine Learning Projects</h1>
+      <h1>Craig's Machine Learning Page</h1>
     </header>
 
     <nav id="siteNav"></nav>
-    <nav id="sectionNav"></nav>
+    <!--<nav id="sectionNav"></nav>-->
 
     <main><div>
-      <section title="Introduction" id="secIntroduction">
-        <h2>Machine Learning Projects</h2>
+      <section title="Summary" id="summary">
+        <h2>My Machine Learning Experience</h2>
 
         <p>
-          There's nothing here yet.  I will do a couple of kaggle.com projects though.
+          I don't have a tons and tons of experience with machine learning problems, but I know a bit.  When I was at Harvey Mudd College, I took a neural networks class, though this was in 2006 before any sort of deep-learning revolution.  I've also taken <a href="https://www.coursera.org/learn/machine-learning">Andrew Ng's Excellent Coursera Machine Learning Class</a>, which features a number of problems and algorithms written in Octave (like Matlab).  I've also read through <a href="https://www.packtpub.com/big-data-and-business-intelligence/python-machine-learning">Sebastian Raschka's book, "Python Machine Learning"</a> and looked through a fair number of machine learning websites.
+        </p>
+        <p>
+          At this point, I have some familiarity with the Python packages pandas, numpy, scikit, and matplotlib.  I have a good understanding of various machine learning concepts, including variance vs bias, supervised vs unsupervised learning, k-fold cross validation, etc, etc.
+        </p>
+        <p>
+          I've applied many kinds of models and techniques, including linear regression, logistic regression, SVM, decision tree, k-means, random forest, neural net, and PCA.  Besides toy assignments from books or classes, I've worked through a couple of <a href="https://www.kaggle.com/competitions">the competitions on kaggle.com</a>.
         </p>
       </section>
-      <section title="Project 1" id="A doozy">
-        <h2>Project 1</h2>
-        <p>
-        It'll be a Dusenburg.
-        </p>
-      </section>
-      <section title="ML Concepts" id="myConcepts">
-        <h2>Machine Learning Concepts</h2>
-
-        <h3>Introduction</h3>
-        <p>
-          Often we want a computer to make a prediction about a thing or individual based on information about that thing or inidividual.  For instance, maybe we'd want to predict whether or not a person is rested based on a number of factors (usually called "features") such as what time they went to bed, when they got up, how old they are, how stressed out they are, etc.
-        </p>
-        <p>
-          Sometimes we can explicitly program the computer to make this prediction using clear rules.  In the example above, we might program the computer to compute the total amount of hours the person slept and, if the person slept at least eight hours, return "RESTED".  Maybe we'd also add some adjustments to adjust for the fact that people of different ages need different amounts of sleep, etc.
-        </p>
-        <p>
-          For some problems, it's unclear how to write programs to make good predictions.  Individuals in the data set may have lots features and it may be unclear how they are all related.  In machine learning, rather than program a computer explicitly how to arrive at a decision, we "train" the computer how to arrive at a decision based on a load of data.  Somehow the computer must take a look at the data and come up with a "model" to make predictions.
-        </p>
-
-        <h3>Regression vs classification</h3>
-        <p>
-          In a regression problem, you are trying to make a prediction about the continuous value of something.  For instance, you might try to predict house value based on a number of features such as square footage, number of bedrooms, density of the neighborhood, etc.  Or, as above, you might predict whehter a person will be rested or not based on a number of factors such as how much sleep they got.
-        </p>
-        <p>
-          In a classification problem, you are trying to make a prediction about categorical value of something.  For instance, you might try to predict what type of pet you have (cat, dog, bird, etc) based on features such as weight, age, trips to the vet, color, etc.
-        </p>
-
-        <h3>Supervised vs Unsupervised Learning</h3>
-        <p>
-          In supervised learning, you have a data as well as the labels for the data.  For instance, if you want to be able to recognize images of digits, you could have a lot of images and with each image labelled correct from the set {0, 1, ..., 9}.  Or you might want to predict how tall someone will grow based on diet, parent's heights, etc.  In that case, you'd have a bunch of information on people with known information and known heights to train your model on.
-        </p>
-        <p>
-          In unsupervised learning, on the other hand, you have a bunch of unlabeled data.  For instance, you might want to group ("cluster") movies by genre based on features such as total length of movie, budget, minutes of dialog, number of car chases, etc.
-        </p>
-
-        <h3>Training Data vs Test Data</h3>
-        <p>
-          It would be silly to evaluate how well our model does based on training data.  If that were the case, the model could just memorize the predictions for each individual in the training set, get a "perfect" score for the training data, but make bad predictions data not in your training set.
-        </p>
-        <p>
-          So, what we generally do is set aside some of our training data as test data.  This test data isn't used to train the model.  It's used after the model is trained to see how well we can expect the model to do on new data.
-        </p>
-
-        <h3>Bias vs Variance</h3>
-        <p>
-          Bias (aka "underfitting") occurs when your model does not fully take into account all the useful patterns that may be gleaned from the training data.  This phenomenon is called bias because it's as though the model is biased against the data it is supposed to be training on.
-        </p>
-        <p>
-          Variance (aka "overfitting") occurs when your model becomes too highly attuned to the training data.  The model may have "noticed" details that were just anomalies in the training data and that may not generalize to the actual patterns in the data at large in the world or data in your training set.  Regularization, which adds a penalty for large parameter values and tends to "smooth" out your model's boundaries, may help with overfitting.
-        </p>
-        <p>
-          These two problems are opposites and it would be great to find a happy medium between the two.  For this and other similar purposes, we often set aside a third chunk of data, the "validation" data, in addition to the training and test data.  This validation data is used to fit the parameters of the model that control regularization and other factors.
-        </p>
-
-        <h3>Some Types of Machine Learning Models</h3>
-        <ul>
-          <li>Supervised</li>
-          <ul>
-            <li>Linear Regression</li>
-            <li>Logistic Regression (not regression)</li>
-            <li>Support Vector Machines</li>
-            <li>Neural Networks</li>
-            <li>Nearest Neighbor</li>
-            <li>Decision Trees</li>
-            <li>Random Forests</li>
-          </ul>
-          <li>Unsupervised</li>
-          <ul>
-            <li>K-means</li>
-            <li>Principal Component Analysis</li>
-            <li>Neural Networks (sometimes)</li>
-          </ul>
-        </ul>
-      </section>
-    </div></main>
-
+    </div></mai
     <footer></footer>
   </body>
 </html>
