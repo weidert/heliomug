@@ -1,5 +1,28 @@
-canvas {
+main > * {
+	margin: auto;
+	text-align: center;
+}
+
+.standard {
+	width: 640px;	
 	border: 3px solid #000;
 	border-radius: 12px;
+	margin: auto;
+	text-align: center;
+}
+
+canvas {
 	background-color: #080;
+	height: 480px;
+	margin: 10px auto 10px auto;
+}
+
+div {
+	margin: 10px auto 10px auto;	
+}
+
+.writingZone {
+	padding: 10px;
+	background-color: #eee;
+	margin: 10px auto 10px auto;
 }

@@ -18,11 +18,28 @@
 	</head>
 	<body>
 		<header>
-			<h1>Fake Card / Kill Card</h1>
+			<h1>Face Card / Kill Card</h1>
 		</header>
 		<nav id="siteNav"></nav>
 		<main>
-			<canvas id="board" width="640" height="480"></canvas>
+			<div class="centered"><canvas class="standard" id="board"></canvas></div>
+			<div class="standard writingZone" id="under">
+				<select id="playerCount">
+				  <option value="2">2 Players</option>
+				  <option value="3">3 Players</option>
+				  <option selected="seleted" value="4">4 Players</option>
+				  <option value="5">5 Players</option>
+				  <option value="6">6 Players</option>
+				</select>
+				<button id="newGame" type="button">New Game!</button>
+				<button id="newRound" type="button">New Round!</button>
+				<button id="startRound" type="button">Start Round!</button>
+				<div id="nameDiv"></div>
+				<div id="messageDiv">
+					<div id="message">asdf</div>
+					<button id="nextMessage" type="button">Next Message</button>
+				</div>
+			</div>
 		</main>
 		<footer>
 		</footer>
