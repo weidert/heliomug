@@ -72,6 +72,32 @@
         </div><div style="clear:both"></div>
       </section>
 
+      <section title="Genome Query Displayer" id="secGenome">
+        <h2>Genome Query Displayer</h2>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./biod/images/results_graph.png"><img class="captioned" src="./biod/images/results_graph.png" alt="Results Graph Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              I wrote this <a href="./biod/">Genome Query Displayer</a> to read a large data file full of readings and display the results of queries on those readings.  Each reading consisted of a chromosome, start offset, end offset, and value.  My program read the raw text files with data, structured the data so that it was easy to run fast queries, then displayed the results of those queries in various ways.  I was explicitly forbidden from using databases.  
+            </p>
+            <p>
+              The program makes use of:
+              <ul>
+                <li>B-Trees to store large amounts of readings.</li>
+                <li>Lambda expressions (new in Java 8) to extract features from readings.</li>
+                <li>Swing for the GUI</li>
+                <li>Threads to load and process the data more quickly</li>
+                <li>Regular Expressions for file parsing</li>
+                <li>Abstract classes, interfaces, polymorphism, factory classes, singletons, enums, file input/output</li>
+
+              </ul>
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
       <section title="Game of Life" id="secGameOfLife">
         <h2>Conway's Game of Life</h2>
         <div class="picAndCap">
