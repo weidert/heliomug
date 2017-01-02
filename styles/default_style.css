@@ -140,6 +140,7 @@ img {
 .cenImg {
 	display: block;
 	margin: auto;
+    text-align: center;
 }
 
 .justify {
