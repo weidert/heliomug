@@ -9,6 +9,10 @@ body {
 	background-color: #cef;
 }
 
+main p, main li {
+    padding-left: 10px;
+}
+
 header, footer {
 	background-color: #040;
 	text-align: center;
