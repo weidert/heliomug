@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Chord Quizzer</title>
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "A project to quiz you about chords">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <script type="text/javascript" src="scripts/tracts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBIWsfuV8ADzuBaYMbaPNaPJLJj3mHv5tM"></script>
+    <script type="text/javascript" src="scripts/mapUtils.js"></script>
+    <script type="text/javascript" src="scripts/mapFunctions.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+		    initMap();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Chord Quizzer</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Summary</h2>
+        <p>
+            This is a project I worked on in January 2017.  I wanted to be able to do a better job of recognizing chords, particularly on the guitar.  
+        </p>
+      </section>
+      <section title="Chord Type Quiz" id="typeQuiz">
+        <h3>Chord Type Quiz</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This tab simply displays the results in a long text form.  This text may be saved to file.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Key Chord Quiz" id="keyQuiz">
+        <h3>Key Chord Quiz</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This tab simply displays the results in a long text form.  This text may be saved to file.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Interval Quiz" id="intervalQuiz">
+        <h3>Interval Quiz</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This tab simply displays the results in a long text form.  This text may be saved to file.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Programming Concepts Used" id="progInfo">
+        <h3>Programming Concepts Used</h3>
+        <ul>
+          <li> 
+            I used Java's Swing package and all its goodies to make the GUI.  
+          </li>
+          <li>
+            I used threads have the notes turn off with some delayed action.  
+          </li>
+          <li>
+            I used a ton of lambda expressions all over the place.  
+          </li>
+        </ul>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>
