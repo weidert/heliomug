@@ -11,9 +11,9 @@ function makeSectionNav() {
     navString += "</ul>";
     $("#sectionNav").append(navString)
     $("#sectionNav").addClass("vertNav");
-    $("main").addClass("padLeft");
+    $("main > div").addClass("padLeft");
+    $("#sectionNav").prependTo("main");
     handleWindowWidth();
-    window.onresize = handleWindowWidth;
   }
 }
 
@@ -23,16 +23,20 @@ function doesSideNavExist() {
 
 function isSideNavVisible() {
   var width = $(window).width();
-  return width > 890;
+  return width > 900;
 }
 
 function handleWindowWidth() {
+  $("main").css("width", Math.min(900, $(window).width()));
+  $("main > div").css("width", Math.min(720, $(window).width()));
   if (isSideNavVisible() && doesSideNavExist()) {
     $("#sectionNav").removeClass("hide");
-    $("main").addClass("padLeft")
+    $("main > div").removeClass("cenDiv")
+    $("main > div").addClass("padLeft")
   } else {
     $("#sectionNav").addClass("hide");
-    $("main").removeClass("padLeft")
+    $("main > div").removeClass("padLeft")
+    $("main > div").addClass("cenDiv")
   }
 }
 
@@ -54,7 +58,7 @@ function makeSiteNav() {
 }
 
 function makeFooter() {
-  var footerString = "<p>This page belongs to <a href='http://craigweidert.com'>Craig Weidert</a></p>"
+  var footerString = "<p>This page belongs to <a href='http://heliomug.com/about.html'>Craig Weidert</a></p>"
   if ($("footer").length > 0) {
     $("footer").append(footerString);
   }
@@ -87,4 +91,5 @@ function makeStandardStuff() {
   makeSiteNav();
   makeFooter();
   makeBackToTopButton();
+  window.onresize = handleWindowWidth;
 }
