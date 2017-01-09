@@ -81,7 +81,7 @@ main {
 	text-align: justify;
 }
 
-main > div {
+body > div {
 	width: 720px;
 	margin: auto;
 }
@@ -120,10 +120,6 @@ img {
 		-webkit-border-radius: 30px;
 		-moz-border-radius: 30px;
 		border-radius: 30px;
-}
-
-.centerStrip {
-		width: 720px;
 }
 
 .captioned {

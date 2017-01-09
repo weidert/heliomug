@@ -1,22 +1,18 @@
 <!doctype html>
 <html lang="en-US">
   <head>
-    <title>Craig's Chord Quizzer</title>
+    <title>Craig's Ear Trainer</title>
     <meta charset="UTF-8">
     <meta name = "author" content = "Craig Weidert">
     <meta name = "description" content = "A project to quiz you about chords">
-    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
-    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../../images/icons/heliomug.ico">
     <script type="text/javascript" src="scripts/tracts.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBIWsfuV8ADzuBaYMbaPNaPJLJj3mHv5tM"></script>
-    <script type="text/javascript" src="scripts/mapUtils.js"></script>
-    <script type="text/javascript" src="scripts/mapFunctions.js"></script>
-    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script src="../../../../scripts/makeStandardElements.js"></script>
     <script>
       $(document).ready(function() {
         makeStandardStuff();
-		    initMap();
       });
     </script>
   </head>
@@ -35,16 +31,19 @@
         <p>
             This is a project I worked on in January 2017.  I wanted to be able to do a better job of recognizing chords, particularly on the guitar.  
         </p>
+        <p>
+            Here is <a href="ear_trainer.jar">a link</a> to the jar.  
+        </p>
       </section>
       <section title="Chord Type Quiz" id="typeQuiz">
         <h3>Chord Type Quiz</h3>
         <div class="picAndCap">
           <div class="capPic">
-            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+            <a href="images/type.png"><img class="captioned" src="images/type.png"></a>
           </div>
           <div class="caption">
             <p>
-              This tab simply displays the results in a long text form.  This text may be saved to file.  
+                This is a tab to help you identify what type of chords you are playing.  
             </p>
           </div>
         </div><div style="clear:both"></div>
@@ -53,11 +52,11 @@
         <h3>Key Chord Quiz</h3>
         <div class="picAndCap">
           <div class="capPic">
-            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+            <a href="images/key.png"><img class="captioned" src="images/key.png"></a>
           </div>
           <div class="caption">
             <p>
-              This tab simply displays the results in a long text form.  This text may be saved to file.  
+                This is a tab to help you identify different chords in a given key.  
             </p>
           </div>
         </div><div style="clear:both"></div>
@@ -66,11 +65,11 @@
         <h3>Interval Quiz</h3>
         <div class="picAndCap">
           <div class="capPic">
-            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+            <a href="images/interval.png"><img class="captioned" src="images/interval.png"></a>
           </div>
           <div class="caption">
             <p>
-              This tab simply displays the results in a long text form.  This text may be saved to file.  
+                This is a tab to help you identify the interval between two notes.  
             </p>
           </div>
         </div><div style="clear:both"></div>
