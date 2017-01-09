@@ -27,7 +27,7 @@ function isSideNavVisible() {
 }
 
 function handleWindowWidth() {
-  $("main").css("width", Math.min(900, $(window).width()));
+  $("main").css("width", Math.min($(window).width()), 900);
   $("main > div").css("width", Math.min(720, $(window).width()));
   if (isSideNavVisible() && doesSideNavExist()) {
     $("#sectionNav").removeClass("hide");
