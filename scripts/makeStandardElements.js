@@ -28,17 +28,14 @@ function isSideNavVisible() {
 function handleWindowWidth() {
   $("main").css("width", Math.min(900, $(window).width()));
   $("main > div").css("width", Math.min(720, $(window).width()));
-  if (isSideNavVisible()) {
+  if (isSideNavVisible() && doesSideNavExist()) {
     $('#topButton').fadeIn('slow');
     $("#topButton").css("left", ($(window).width() - 900) / 2 + 90 - 60 / 2);
-  } else {
-    $('#topButton').fadeOut('slow');
-  }
-  if (isSideNavVisible() && doesSideNavExist()) {
     $("#sectionNav").removeClass("hide");
     $("main > div").removeClass("cenDiv")
     $("main > div").addClass("padLeft")
   } else {
+    $('#topButton').fadeOut('slow');
     $("#sectionNav").addClass("hide");
     $("main > div").removeClass("padLeft")
     $("main > div").addClass("cenDiv")
