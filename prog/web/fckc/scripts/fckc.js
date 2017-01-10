@@ -127,8 +127,11 @@ function Game() {
 	this.players = [];
 	this.deck = null;
 	
+	this.isSetup = false;
+	
 	this.setupGame = function() {
 		console.log("setup game");
+		_this.isSetup = true;
 		_this.resetDeck();
 		var numPlayers = $('#playerCount').find(":selected").val();
 		_this.setPlayers(numPlayers);
@@ -138,19 +141,22 @@ function Game() {
 	
 	this.setupRound = function() {
 		console.log("setting up round");
+		if (!_this.isSetup) {
+			_this.setupGame();	
+		}
 		_this.io.clearMessages();
 		_this.isActive = false;
 		_this.gameStage = -1;
 		_this.timeLastDrawn = 0;
 		_this.resetDeck();
 		_this.resetPlayers();
+		_this.draw();
 		_this.dealHoleCards();
 		_this.showSecretCards();
 	}
 	
 	this.startRound = function() {
 		console.log("starting round");
-		//_this.getBoard().contentEditable = true;
 		_this.resetTimer();
 		_this.isActive = true;
 		_this.gameStage = 0;
@@ -305,12 +311,6 @@ function Game() {
 		
 		var $div = $("<div>", {"class": "floater ephemeral"});
 		$div.addClass("floater");
-		if (player.isAlive()) {
-			$div.css("background-color", color);
-		} else {
-			$div.css("background-color", "#888");
-			score = "X";
-		}
 		var winString;
 		if (player.getWins() == 0) {
 			winString = "";
@@ -321,7 +321,13 @@ function Game() {
 		}
 		$div.append("<h3>" + player.getName() + winString + "</h3>");	
 		var $table = $("<table>");
-		$table.append("<tr><td>Score:</td><td class='leftt'>" + score + "+</td></tr>")
+		if (player.isAlive()) {
+			$div.css("background-color", color);
+			$table.append("<tr><td>Score:</td><td class='leftt'>" + score + "+</td></tr>")
+		} else {
+			$div.css("background-color", "#888");
+			$table.append("<tr><td>Score:</td><td class='leftt'>X</td></tr>")
+		}
 		$table.append("<tr><td>Draw:</td><td class='leftt'>&quot" + key + "&quot</td></tr>")
 		$table.append("<tr><td>Cards:</td><td class='leftt'>" + player.getCardString() + "</td></tr>")
 		$div.append($table);
