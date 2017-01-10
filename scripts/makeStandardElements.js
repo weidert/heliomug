@@ -28,6 +28,12 @@ function isSideNavVisible() {
 function handleWindowWidth() {
   $("main").css("width", Math.min(900, $(window).width()));
   $("main > div").css("width", Math.min(720, $(window).width()));
+  if (isSideNavVisible()) {
+    $('#topButton').fadeIn('slow');
+    $("#topButton").css("left", ($(window).width() - 900) / 2 + 90 - 60 / 2);
+  } else {
+    $('#topButton').fadeOut('slow');
+  }
   if (isSideNavVisible() && doesSideNavExist()) {
     $("#sectionNav").removeClass("hide");
     $("main > div").removeClass("cenDiv")
@@ -64,21 +70,22 @@ function makeFooter() {
 }
 
 function makeBackToTopButton() {
-  $("body").prepend('<a href="#" id="topButton">Back to Top</a>');
-  $("#topButton").click(function() {
-  	$('html, body').animate({
-  		scrollTop: 0
-  	}, 700);
-  	return false;
-  });
+    $("main").prepend('<a href="#" id="topButton">Back to Top</a>');
+    $("#topButton").click(function() {
+      	$('html, body').animate({
+  	    	scrollTop: 0
+      	}, 700);
+  	    return false;
+    });
+    $("#topButton").css("left", ($(window).width() - 900) / 2 + 90 - 60 / 2);
 
   var amountScrolled = 150;
 
   $(window).scroll(function() {
   	if ( $(window).scrollTop() > amountScrolled ) {
   		if (isSideNavVisible()) {
-        $('#topButton').fadeIn('slow');
-      }
+            $('#topButton').fadeIn('slow');
+        }
   	} else {
   		$('#topButton').fadeOut('slow');
   	}
