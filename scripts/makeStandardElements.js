@@ -80,7 +80,7 @@ function makeBackToTopButton() {
 
   $(window).scroll(function() {
   	if ( $(window).scrollTop() > amountScrolled ) {
-  		if (isSideNavVisible()) {
+  		if (isSideNavVisible() && doesSideNavExist()) {
             $('#topButton').fadeIn('slow');
         }
   	} else {
