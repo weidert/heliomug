@@ -2,37 +2,29 @@ var SUITS = ["\u2660", "\u2665", "\u2666", "\u2663"];
 var RANKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 var VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"];
 
-var KEYS = ["Q", "]", "T", "E", "U", "O"];
+var KEYS = ["Q", "P", "T", "E", "U", "O"];
 var COLORS = ["#f88", "#f84", "#ff8", "#8f8", "#48f", "#f8f"];
 var NAMES = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
 
-var WIDTH = 200;
-var HEIGHT = 100;
-var MARGIN = 10;
-var TIME_LIMIT = 10;
+var TIME_LIMIT = 20;
 
-function Player(name, key, color, x, y) {
+function Player(name) {
 	this.wins = 0;
 	this.holeCard;
 	this.cash = 100;
 	this.cards = [];
 	this.name = name;
-	this.key = key;
-	this.color = color;
-	this.left = x - WIDTH / 2,
-	this.right = x + WIDTH / 2;
-	this.top = y + HEIGHT / 2
-	this.bottom = y - HEIGHT / 2;
-
-	this.getWidth = function() { return this.right - this.left; }
-	this.getHeight = function() { return this.top - this.bottom; }
 
 	this.setHoleCard = function(card) {
 		this.holeCard = card;
 	}
 
-	this.addCard = function(c) {
-		this.cards.push(c);
+	this.resetHand = function() {
+		this.cards = [];	
+	}
+	
+	this.addCard = function(card) {
+		this.cards.push(card);
 	}
 
 	this.isAlive = function() {
@@ -43,7 +35,17 @@ function Player(name, key, color, x, y) {
 		}
 		return true;
 	}
+	
+	this.addWin = function() {
+		this.wins++;	
+	}
 
+	this.getWins = function() {
+		return this.wins;	
+	}
+	
+	this.getName = function() { return this.name;}
+	
 	this.getPublicScore = function() {
 		if (!this.isAlive()) return 0;
 		var sum = 0;
@@ -65,29 +67,6 @@ function Player(name, key, color, x, y) {
 		}
 		return str;
 	}
-
-	this.contains = function(x, y) {
-		return (x < this.right && x > this.left && y < this.top && y > this.bottom);
-	}
-
-	this.draw = function() {
-		var context = $('#board')[0].getContext("2d");
-		var lh = 16;
-		context.font = "18px Monospace";
-		if (this.isAlive()) {
-			context.fillStyle = this.color;
-		} else {
-			context.fillStyle = "#888";
-		}
-		context.fillRect(this.left, this.bottom, this.getWidth(), this.getHeight());
-		context.fillStyle = "#000";
-		var score = this.getPublicScore();
-		if (!this.isAlive()) score = "X";
-		context.fillText(this.name + " - " + score + " points", this.left, this.bottom + 1 * lh);
-		context.fillText(this.key, this.left, this.bottom + 2 * lh);
-		context.fillText(this.getCardString(), this.left, this.bottom + 3 * lh);
-	}
-
 }
 
 function Deck(suits, values, ranks) {
@@ -114,12 +93,6 @@ function Deck(suits, values, ranks) {
 	}
 }
 
-/*
-function KeyMap() {
-	var keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-}
-*/
-
 function Card(value, rank, suit) {
 	this.value = value;
 	this.suit = suit;
@@ -141,14 +114,11 @@ function Card(value, rank, suit) {
 }
 
 function Game() {
-	this.width = 640;
-	this.height = 480;
-	var r = 200;
-
 	this.pot = 0;
-	this.timeLastDrawn;
+	this.timeLastDrawn = 0;
 
 	this.isActive = false;
+	this.gameStage = -1;
 
 	this.io = new IO();
 	
@@ -157,81 +127,60 @@ function Game() {
 	this.players = [];
 	this.deck = null;
 	
-	this.getBoard = function() {
-		return $('#board')[0];
-	}
-	
-	this.getContext = function() {
-		return _this.getBoard().getContext("2d");
-	}
-	
-	this.getPlayers = function() {
-		return _this.players;
-	}
-	
-	
 	this.setupGame = function() {
 		console.log("setup game");
 		_this.resetDeck();
 		var numPlayers = $('#playerCount').find(":selected").val();
 		_this.setPlayers(numPlayers);
-		_this.drawBoard();
 		_this.io.clearMessages();
+		_this.draw();
 	}
 	
 	this.setupRound = function() {
-		console.log("setup round");
+		console.log("setting up round");
+		_this.io.clearMessages();
 		_this.isActive = false;
+		_this.gameStage = -1;
+		_this.timeLastDrawn = 0;
 		_this.resetDeck();
+		_this.resetPlayers();
 		_this.dealHoleCards();
 		_this.showSecretCards();
-		_this.io.clearMessages();
 	}
 	
 	this.startRound = function() {
-		console.log("start round");
-		_this.getBoard().contentEditable = true;
+		console.log("starting round");
+		//_this.getBoard().contentEditable = true;
 		_this.resetTimer();
 		_this.isActive = true;
+		_this.gameStage = 0;
 		_this.update();
 		setInterval(_this.update, 1000);
 	}
 	
 	this.addListeners = function() {
-		$('#newGame').click(function() { _this.setupGame(); });
-		$('#newRound').click(function() { _this.setupRound(); });
-		$('#startRound').click(function() { _this.startRound(); });
-		
-		var board = $('#board')[0];
-		
-		board.width = this.width;
-		board.height = this.height;
-
-
-		board.addEventListener('mousedown', function(e) {
-			if (_this.isActive) {
-				var board = _this.getBoard();
-				var x = e.pageX - board.offsetLeft;
-				var y = e.pageY - board.offsetTop;
-				var p = _this.getClickedPlayer(x, y);
-				if (p != null) {
-					_this.dealPlayer(p);
-				}
-			}
+		$('#newPlayers').click(function() { 
+			console.log("new players");
+			_this.setupGame(); 
 		});
-
-		board.addEventListener('keydown', function(e) {
+		$('#startRound').click(function() { _this.setupRound(); });
+		
+		$("#board").keydown(function(e) {
 			if (_this.isActive) {
 				var p = _this.getTypedPlayer(String.fromCharCode(e.keyCode));
 				if (p != null) {
 					_this.dealPlayer(p);
 				}
 			}
-		}, false);
-		
-		board.contentEditable = true;
+		});
 	}
 
+	this.resetPlayers = function() {
+		for (var i = 0 ; i < this.players.length ; i++) {
+			var player = _this.players[i];
+			player.resetHand();
+		}
+	}
 	
 	this.resetDeck = function() {
 		_this.deck = new Deck(SUITS, VALUES, RANKS);
@@ -241,10 +190,7 @@ function Game() {
 	this.setPlayers = function(numPlayers) {
 		_this.players = [];
 		for (var i = 0 ; i < numPlayers ; i++) {
-			var angle = i * 2 * Math.PI / numPlayers;
-			var x = (this.width / 2 - WIDTH / 2 - MARGIN) * Math.cos(angle) + this.width / 2;
-			var y = (this.height / 2 - HEIGHT / 2 - MARGIN) * Math.sin(angle) + this.height / 2;
-			_this.players.push(new Player(NAMES[i], KEYS[i], COLORS[i], x, y));
+			_this.players.push(new Player(NAMES[i]));
 		}
 	}
 	
@@ -257,7 +203,7 @@ function Game() {
 	this.dealPlayer = function(player) {
 		if (player.isAlive()) {
 			player.addCard(this.deck.deal());
-			_this.drawBoard();
+			_this.draw();
 		}
 		_this.resetTimer();
 	}
@@ -268,37 +214,37 @@ function Game() {
 
 	
 	this.getTimeLeft = function() {
-		return Math.floor(TIME_LIMIT - (Date.now() - this.timeLastDrawn) / 1000);
+		if (this.timeLastDrawn == 0) {
+			return 0;
+		} else {
+			return Math.floor(TIME_LIMIT - (Date.now() - this.timeLastDrawn) / 1000);
+		}
 	}
 
 	this.getTypedPlayer = function(c) {
 		for (var i = 0 ; i < this.players.length ; i++) {
-			if (this.players[i].key == c) {
+			console.log(c);
+			console.log(KEYS[i]);
+			if (KEYS[i] == c) {
 				return _this.players[i];
 			}
 		}
 		return null;
 	}
 
-	this.getClickedPlayer = function(x, y) {
-		for (var i = 0 ; i < this.players.length ; i++) {
-			if (this.players[i].contains(x, y)) {
-				return this.players[i];
-			}
-		}
-		return null;
-	}
-
 	this.endRound = function() {
-		console.log("game over");
 		if (this.isActive) {
 			this.isActive = false;
+			this.gameStage = 1;
 			var winner = this.getWinner();
 			var name = winner.name;
 			var score = winner.getTotalScore();
 			var holeCard = winner.holeCard.toString();
 			var message = "WINNER: " + name + " with " + score + " points and hole card " + holeCard;
+			winner.addWin();
 			this.io.addMessage(message);
+			this.io.showNextMessage();
+			this.draw();
 		}
 	}
 
@@ -329,39 +275,106 @@ function Game() {
 		return (numAlive <= 1);
 	}
 
-	this.drawPlayers = function() {
-		for (var i = 0 ; i < this.players.length ; i++) {
-			_this.players[i].draw();
-		}
-	}
-
 	this.update = function() {
-		console.log("update");
 		if (_this.isActive) {
 			if (_this.isGameOver()) {
 				_this.endRound();
 			} else {
-				_this.drawBoard();
+				_this.draw();
 			}
+			$("#board").focus();
 		}
 	}
 
-	this.drawBoard = function() {
-		_this.drawPlayers();
-		var context = _this.getContext();
-		context.fillStyle = "#fff";
-		context.fillRect(_this.width / 2 - WIDTH / 2, _this.height / 2 - HEIGHT / 2, WIDTH, HEIGHT);
-		context.fillStyle = "#000";
-		var timeLeft = _this.getTimeLeft();
-		var x =  _this.width / 2 - WIDTH / 2;
-		var y = _this.height / 2 - HEIGHT / 2 + 16;
-		context.fillText("Time Left: " + timeLeft, x, y);
+	this.getInfoDiv = function() {
+		var $div = $("<div>", {"class": "game floater ephemeral"});
+		$div.addClass("floater");
+		if (_this.gameStage == 0) {
+			var timeLeft = _this.getTimeLeft();
+			$div.append("<p>Time Left: " + timeLeft + "</p>");
+		} else if (_this.gameStage == -1) {
+			$div.append("<p>Round not started</p>");
+		} else {
+			$div.append("<p>Round finished</p>");
+		}
+		return $div;
+	}
+	
+	this.getPlayerDiv = function(player, color, key, x, y) {
+		var score = player.getPublicScore();
+		
+		var $div = $("<div>", {"class": "floater ephemeral"});
+		$div.addClass("floater");
+		if (player.isAlive()) {
+			$div.css("background-color", color);
+		} else {
+			$div.css("background-color", "#888");
+			score = "X";
+		}
+		var winString;
+		if (player.getWins() == 0) {
+			winString = "";
+		} else if (player.getWins() == 1) {
+			winString = " (1 win)";
+		} else {
+			winString = " (" + player.getWins() + " wins)";
+		}
+		$div.append("<h3>" + player.getName() + winString + "</h3>");	
+		var $table = $("<table>");
+		$table.append("<tr><td>Score:</td><td class='leftt'>" + score + "+</td></tr>")
+		$table.append("<tr><td>Draw:</td><td class='leftt'>&quot" + key + "&quot</td></tr>")
+		$table.append("<tr><td>Cards:</td><td class='leftt'>" + player.getCardString() + "</td></tr>")
+		$div.append($table);
+		
+		$div.click(function() {
+			if (_this.isActive) {
+				_this.dealPlayer(player);
+				_this.update();
+			}
+		});
+		return $div;
+	}
+	
+	this.placePlayerDiv = function($playerDiv, i) {
+
+		var boardWidth = $("#board").width();
+		var boardHeight = $("#board").height();
+
+		var ySize = .25;
+		var xSize = .25;
+		
+		$playerDiv.css("width", boardWidth * xSize);
+		$playerDiv.css("height", boardHeight * ySize);
+		$('#board').append($playerDiv);
+
+		
+		var angle = i * 2 * Math.PI / this.players.length;
+		var r = .33;
+		
+		var x = boardWidth / 2 + boardWidth * r * Math.cos(angle);
+		var y = boardHeight / 2 + boardHeight * r * Math.sin(angle);
+		
+		$playerDiv.css("left", x - boardWidth * xSize * .5);
+		$playerDiv.css("top", y - boardHeight * ySize * .5);
+	}
+	
+	this.draw = function() {
+		console.log("drawing board");
+		$(".ephemeral").remove();
+		$("#board").append(_this.getInfoDiv());
+		for (var i = 0 ; i < this.players.length ; i++) {
+			var player = _this.players[i];
+			var color = COLORS[i];
+			var key = KEYS[i];
+			$div = _this.getPlayerDiv(player, color, key);
+			_this.placePlayerDiv($div, i);
+		}
 	}
 	
 	this.showSecretCards = function() {
 		for (var i = 0 ; i < _this.players.length ; i++) {
 			var p = _this.players[i];
-			this.io.addMessage(p.name + " player ONLY, hit \"Next Message\" to see your secret card.");
+			this.io.addMessage(p.name + " ONLY, hit \"Ok!\" to see your secret card.");
 			var score = p.holeCard.getScore();
 			var points;
 			if (score == 1) {
@@ -371,6 +384,8 @@ function Game() {
 			}
 			this.io.addMessage(p.name + ", your card is: " + p.holeCard.toString() + points);
 		}
+		this.io.addMessageWithCallback("Start Round!", this.startRound);
+		this.io.showNextMessage();
 	}
 
 	this.addListeners();
@@ -381,70 +396,51 @@ function IO() {
 	
 	this.messages = [];
 	this.questions = [];
-	this.fxns = [];
-	this.currentFxn;
+	this.callbacks = [];
 
-	$('#messageDiv').hide();
-	
-	$('#nextMessage').click(function() {
-		$('#messageDiv').hide();
-		_this.showMessage();
-	});
-
-	$('#ok').click(function() {
-		console.log("approve!");
-		$('#questionDiv').hide();
-		var fxn = _this.currentFxn;
-		console.log("fxn");
-		console.log(fxn);
-		fxn();
-		_this.showQuestion();
-	});
-	
-	$('#no').click(function() {
-		console.log("decline!");
-		$('#questionDiv').hide();
-		_this.showQuestion();
-	});
-	
-	this.showMessage = function() {
-		if (_this.messages.length == 0) {
-			$('#messageDiv').hide();
-		} else {
-			if (!$('#messageDiv').is(":visible")) {
-				$('#messageDiv').show();
-				var message = _this.messages.shift();
-				$('#message').html(message);
-			}
-		}
+	this.hideMessage = function() {
+		$("#message").html("&nbsp");
+		$("#message").html("&nbsp");
+		$("#okButton").attr("disabled", "disabled");
 	}
 
-	this.showQuestion = function() {
-		if (_this.questions.length == 0) {
-			$('#questionDiv').hide();
+	this.hideMessage();
+
+	$('#okButton').click(function() {
+		var fxn = _this.callbacks.shift();
+		if (fxn != undefined) {
+			fxn();
+		}
+		if (_this.messages.length == 0) {
+			_this.hideMessage();
 		} else {
-			if (!$('#questionDiv').is(":visible")) {
-				$('#questionDiv').show();
-				var question = _this.questions.shift();
-				_this.currentFxn = _this.fxns.shift();
-				$('#question').html(question);
-			}
+			_this.showNextMessage();
+		}
+	});
+
+	this.showNextMessage = function() {
+		if (_this.messages.length > 0) {
+			var message = _this.messages.shift();
+			$('#messageDiv').show();
+			$('#okButton').prop('disabled', false);
+			$('#message').html(message);
 		}
 	}
 
 	this.clearMessages = function() {
 		_this.messages = [];
+		_this.callbacks = [];
+		_this.hideMessage();
 	}
-	
+
 	this.addMessage = function(message) {
 		_this.messages.push(message);
-		_this.showMessage();
+		_this.callbacks.push(function() {});
 	}
 	
-	this.addQuestion = function(question, fxn) {
-		_this.questions.push(question);
-		_this.fxns.push(fxn);
-		_this.showQuestion();
+	this.addMessageWithCallback = function(message, callback) {
+		_this.messages.push(message);
+		_this.callbacks.push(callback);
 	}
 }
 
