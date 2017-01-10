@@ -48,6 +48,7 @@ function makeSiteNav() {
     navString += '<li><a href="http://heliomug.com/prog/visualizations">Data Vis</a></li>';
     navString += '<li><a href="http://heliomug.com/prog/ml">Machine Learning</a></li>';
     navString += '<li><a href="http://heliomug.com/caller/caller_description.html">Caller</a></li>';
+    navString += '<li><a href="http://heliomug.com/prog/web/fckc/">FCKC</a></li>';
     navString += '<li><a href="http://heliomug.com/about.html">About</a></li>';
     // navString += '<li><a href="http://craigweidert.com"><b>Resume Website</b></a></li>';
     navString += "</ul>";
