@@ -321,7 +321,7 @@ function Game() {
 		}
 		$div.append("<h3>" + player.getName() + winString + "</h3>");	
 		var $table = $("<table>");
-		$table.append("<tr><td>Score:</td><td class='leftt'>" + score + "</td></tr>")
+		$table.append("<tr><td>Score:</td><td class='leftt'>" + score + "+</td></tr>")
 		$table.append("<tr><td>Draw:</td><td class='leftt'>&quot" + key + "&quot</td></tr>")
 		$table.append("<tr><td>Cards:</td><td class='leftt'>" + player.getCardString() + "</td></tr>")
 		$div.append($table);
