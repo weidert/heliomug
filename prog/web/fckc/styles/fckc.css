@@ -16,7 +16,7 @@ main *.game {
 	text-align: center;
 }
 
-#mattDiv {
+#matDiv {
 	background-color: #080;	
 }
 
@@ -29,16 +29,19 @@ main *.game {
 	right: 0;
 	top: 0;
 	margin: 10px;
+	padding: 5px;
 }
 
 #controlDiv > * {
 	display: block;
 	width: 100%;
+	margin: 5px 0;
 }
 
 #messageDiv {
 	width: 95%;
 	margin: 10px auto;
+	height: 70px;
 }
 
 #messageDiv > * {
@@ -56,8 +59,8 @@ main *.game {
 }
 
 .floater * {
-	margin: 0;	
 	padding: 0;
+	margin: 0;
 }
 
 .floater td {
@@ -66,4 +69,8 @@ main *.game {
 
 .floater td.leftt {
 	text-align: left;
+}
+
+div.winner {
+	border-color: #c00;
 }
