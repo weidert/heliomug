@@ -64,7 +64,7 @@ function Player(name) {
 		} else if (this.getWins() == 1) {
 			winString = " (1 win)";
 		} else {
-			winString = " (" + player.getWins() + " wins)";
+			winString = " (" + this.getWins() + " wins)";
 		}
 		return winString;
 	}
@@ -136,6 +136,7 @@ function Game() {
 	this.setupGame = function() {
 		_this.isSetup = true;
 		_this.isActive = false;
+		_this.enableButtons(true);
 		_this.gameStage = -1;
 		_this.timeLastDrawn = 0;
 		_this.pot = 0;
@@ -146,12 +147,21 @@ function Game() {
 		_this.draw();
 	}
 	
+	this.enableButtons = function(isButtons) {
+		if (isButtons) {
+			$('.gameOptions').prop('disabled', false);
+		} else {
+			$(".gameOptions").attr("disabled", "disabled");
+		}
+	}
+	
 	this.setupRound = function() {
 		if (!_this.isSetup) {
 			_this.setupGame();	
 		}
 		_this.io.clearMessages();
 		_this.isActive = false;
+		_this.enableButtons(false);
 		_this.gameStage = -1;
 		_this.timeLastDrawn = 0;
 		_this.resetDeck();
@@ -164,6 +174,7 @@ function Game() {
 	this.startRound = function() {
 		_this.resetTimer();
 		_this.isActive = true;
+		_this.enableButtons(false);
 		_this.gameStage = 0;
 		_this.update();
 		setInterval(_this.update, 1000);
@@ -243,29 +254,47 @@ function Game() {
 	this.endRound = function() {
 		if (this.isActive) {
 			this.isActive = false;
+			this.enableButtons(true);
 			this.gameStage = 1;
-			var winner = this.getWinner();
-			var name = winner.name;
-			var score = winner.getTotalScore();
-			var holeCard = winner.holeCard.toString();
-			var message = "WINNER: " + name + " with " + score + " points and hole card " + holeCard;
-			winner.addWin();
+			var winners = this.getWinners();
+			var message;
+			if (winners.length == 1) {
+				var winner = winners[0];
+				var name = winner.name;
+				var score = winner.getTotalScore();
+				var holeCard = winner.holeCard.toString();
+				message = "WINNER: " + name + " with " + score + " points (hole card " + holeCard + ")";
+				winner.addWin();
+			} else {
+				message = "TIE: " 
+				for (var i = 0 ; i < winners.length ; i++) {
+					var winner = winners[i];
+					if (i > 0) {
+						message += ", ";
+					}
+					message += winner.name;
+					winner.addWin();
+				}
+				message += " (score: " + winners[0].getTotalScore() + ")";
+			}
 			this.io.addMessage(message);
 			this.io.showNextMessage();
 			this.draw();
 		}
 	}
 
-	this.getWinner = function() {
-		var winner = null;
+	this.getWinners = function() {
+		var winners = [];
 		var maxScore = 0;
 		for (var i = 0 ; i < _this.players.length ; i++) {
 			var p = _this.players[i];
-			if (p.getTotalScore() > maxScore) {
-				winner = p;
+			if (p.isAlive() && p.getTotalScore() > maxScore) {
+				winners = [p];
+			} else if (p.isAlive() && p.getTotalScore() == maxScore) {
+				winners.push(p);	
 			}
 		}
-		return winner;
+		return winners;
 	}
 
 	this.getApparentWinners = function() {
@@ -376,7 +405,6 @@ function Game() {
 		$(".ephemeral").remove();
 		$("#board").append(_this.getInfoDiv());
 		var winners = _this.getApparentWinners();
-		console.log(winners);
 		for (var i = 0 ; i < this.players.length ; i++) {
 			var player = _this.players[i];
 			var color = COLORS[i];
