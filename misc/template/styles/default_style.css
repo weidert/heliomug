@@ -1,0 +1,194 @@
+* {
+    font-family: 'Lato', Sans-Serif;
+    box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: #cef;
+}
+
+main {
+	padding: 0;
+	text-align: justify;
+	width: 900px;
+	margin: auto;
+}
+
+main > div {
+    padding: 0 10px;
+}
+
+main > p, main > li {
+    padding-left: 10px;
+}
+
+header, footer {
+	background-color: #040;
+	text-align: center;
+	color: white;
+	width: 100%;
+	padding: 1em 1em;
+	border: 3px solid #040;
+}
+
+header { top: 0; }
+header * { margin: 0; }
+footer { bottom: 0; }
+footer * { margin: 0; }
+footer a { color: white; }
+
+nav ul {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+}
+nav li a {
+    display: block;
+		padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+nav.horizNav li a:hover:not(.active) { background-color: #044; }
+nav.horizNav li a { color: white; }
+nav.horizNav {
+	border: 1px solid #bbb;
+	background-color: #088;
+}
+nav.horizNav ul {
+	margin: 0;
+	display: block;
+	text-align: center;
+}
+nav.horizNav li {
+		display: inline-block;
+		border-right: 1px solid #bbb;
+}
+nav.horizNav li:last-child {	border-right: none; }
+
+nav.vertNav {
+	margin: 0 10px;
+	width: 160px;
+	height: 100%;
+	position: fixed;
+}
+nav.vertNav ul {
+	position: fixed;
+}
+nav.vertNav li {
+	float: none;
+	border-top: 1px solid #bbb;
+    padding: 0;
+}
+nav.vertNav li a { color: black; }
+nav.vertNav li a.active { text-decoration: underline; }
+nav.vertNav li a:hover:not(.active) { background-color: #bde; }
+
+table.fancy {
+	border: 3px solid #000;
+	border-radius: 3px;
+	border-collapse: collapse;
+	width: 100%;
+	background-color: #fff;
+	margin: auto;
+}
+table.fancy th {
+	border: 1px solid #888;
+	text-align: center;
+}
+table.fancy td {
+	border: 1px solid #888;
+	text-align: center;
+}
+
+img {
+	margin: auto;
+}
+
+#topButton {
+		display: none;
+		width: 60px;
+		height: 60px;
+		text-indent: -9999px;
+		position: fixed;
+		z-index: 999;
+		bottom:45px;
+		left:45px;
+		background: #088 url("http://heliomug.com/images/icons/top.png") no-repeat center 43%;
+		-webkit-border-radius: 30px;
+		-moz-border-radius: 30px;
+		border-radius: 30px;
+}
+
+.cenDiv {
+    margin: auto;
+}
+
+.captioned {
+	width: 100%;
+	border: 5px solid #fff;
+}
+
+.picAndCap { width: 100%; }
+.picAndCap .capPic { float: right;	width: 40%; }
+.picAndCap .caption { float: left;	width: 55%; margin-right: 5%; }
+
+.padLeft {
+	margin-left: 180px;
+}
+
+.cenImg {
+	display: block;
+	margin: auto;
+    text-align: center;
+}
+
+.justify {
+	text-align: justify;
+}
+
+.left {
+	position: absolute;
+	left: 1em;
+}
+
+.left * {
+	text-align: left;
+}
+
+.right {
+	position: absolute;
+	right: 1em;
+}
+
+.right * {
+	text-align: right;
+}
+
+.leftJust {
+	text-align: left;
+}
+.rightJust {
+	text-align: right;
+}
+
+.hide {
+	display: none;
+}
+
+.legend {
+	font-family: Arial, sans-serif;
+	background: #fff;
+	padding: 10px;
+	margin: 10px;
+	border: 3px solid #000;
+}
+.legend h3 {
+	text-align: center;
+	margin-top: 0;
+}
+.legend img {
+	vertical-align: middle;
+}
