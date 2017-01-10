@@ -1,5 +1,5 @@
-<DOCTYPE! html>
-<html>
+<!doctype html>
+<html lang="en-US">
 	<head>
 		<meta charset="utf-8"/>
 		<title>Face Card Kill Card</title>
@@ -21,25 +21,45 @@
 			<h1>Face Card / Kill Card</h1>
 		</header>
 		<nav id="siteNav"></nav>
-		<main>
-			<div class="centered"><canvas class="standard" id="board"></canvas></div>
-			<div class="standard writingZone" id="under">
-				<select id="playerCount">
-				  <option value="2">2 Players</option>
-				  <option value="3">3 Players</option>
-				  <option selected="seleted" value="4">4 Players</option>
-				  <option value="5">5 Players</option>
-				  <option value="6">6 Players</option>
-				</select>
-				<button id="newGame" type="button">New Game!</button>
-				<button id="newRound" type="button">New Round!</button>
-				<button id="startRound" type="button">Start Round!</button>
-				<div id="nameDiv"></div>
-				<div id="messageDiv">
-					<div id="message">asdf</div>
-					<button id="nextMessage" type="button">Next Message</button>
+		<main class="narrow">
+            <section title="Description" id="description">
+				<div>
+					<h2>Face Card / Kill Card</h2>
+
+					<p>Face Card Kill Card is a game that my friends and I made up while we were playing poker.  
+					</p>
+					<p>
+					The cards are worth the number shown on the card, with the exception aces, which are worth 11.  Face cards are worth nothing.  Basically, you want to get the highest total without drawing a face card, which eliminates you from the game.  
+					</p>
+					<p>
+					A more thorough set of rules can be found <a href="http://heliomug.com/docs/articles/face_card_kill_card.pdf">here</a>.
+					</p>
 				</div>
-			</div>
+			</section>
+			<section title="Game" id="secGame">
+				<div>
+					<div class="game" id="mattDiv">
+						<div id="board" tabindex="0">
+							<div class="game floater" id="controlDiv">
+								<h3>Game</h3>
+								<select id="playerCount">
+									<option value="2">2 Players</option>
+									<option value="3">3 Players</option>
+									<option selected="seleted" value="4">4 Players</option>
+									<option value="5">5 Players</option>
+									<option value="6">6 Players</option>
+								</select>
+								<button id="newPlayers" type="button">Make Players!</button>
+								<button id="startRound" type="button">Start New Round!</button>
+							</div>
+						</div>
+						<div class="game" id="messageDiv">
+							<p id="message">asdf</p>
+							<button id="okButton" type="button">Ok!</button>
+						</div>
+					</div>
+				</div>
+			</section>
 		</main>
 		<footer>
 		</footer>

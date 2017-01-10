@@ -1,28 +1,69 @@
-main > * {
-	margin: auto;
-	text-align: center;
+main.narrow {
+	width: 720px; 
 }
 
-.standard {
-	width: 640px;	
+main *.game {
+	background-color: #eee;
 	border: 3px solid #000;
 	border-radius: 12px;
-	margin: auto;
+	margin: 10px;
 	text-align: center;
 }
 
-canvas {
-	background-color: #080;
-	height: 480px;
-	margin: 10px auto 10px auto;
+.game p {
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
 
-div {
-	margin: 10px auto 10px auto;	
+#mattDiv {
+	background-color: #080;	
 }
 
-.writingZone {
-	padding: 10px;
+#board {
+	height: 540px;
+	position: relative;
+}
+
+#controlDiv {
+	right: 0;
+	top: 0;
+	margin: 10px;
+}
+
+#controlDiv > * {
+	display: block;
+	width: 100%;
+}
+
+#messageDiv {
+	width: 95%;
+	margin: 10px auto;
+}
+
+#messageDiv > * {
+	margin: 5px;	
+}
+
+.floater {
 	background-color: #eee;
-	margin: 10px auto 10px auto;
+	border: 3px solid #000;
+	border-radius: 6px;
+	position: absolute;
+	padding: 5px;
+	text-align: center;
+	margin: 0;
+}
+
+.floater * {
+	margin: 0;	
+	padding: 0;
+}
+
+.floater td {
+	vertical-align: top;
+}
+
+.floater td.leftt {
+	text-align: left;
 }
