@@ -1,7 +1,3 @@
-var SUITS = ["\u2660", "\u2665", "\u2666", "\u2663"];
-var RANKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-var VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"];
-
 var KEYS = ["Q", "P", "T", "E", "U", "O"];
 var COLORS = ["#f88", "#f84", "#ff8", "#8f8", "#48f", "#f8f"];
 var NAMES = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
@@ -19,14 +15,13 @@ function Player(name) {
 		this.holeCard = card;
 	}
 
-	this.resetHand = function() {
-		this.cards = [];	
-	}
-	
-	this.addCard = function(card) {
-		this.cards.push(card);
-	}
+	this.resetHand = function() { this.cards = []; }
+	this.addCard = function(card) {	this.cards.push(card); }
+	this.addWin = function() { this.wins++;	}
 
+	this.getWins = function() { return this.wins; }
+	this.getName = function() { return this.name;}
+	
 	this.isAlive = function() {
 		for (var i = 0 ; i < this.cards.length ; i++) {
 			if (this.cards[i].isFaceCard()) {
@@ -35,17 +30,7 @@ function Player(name) {
 		}
 		return true;
 	}
-	
-	this.addWin = function() {
-		this.wins++;	
-	}
 
-	this.getWins = function() {
-		return this.wins;	
-	}
-	
-	this.getName = function() { return this.name;}
-	
 	this.getPublicScore = function() {
 		if (!this.isAlive()) return 0;
 		var sum = 0;
@@ -57,7 +42,11 @@ function Player(name) {
 
 	this.getTotalScore = function() {
 		if (!this.isAlive()) return 0;
-		return this.holeCard.getScore() + this.getPublicScore();
+		var holeCardVal = 0;
+		if (this.holeCard != undefined) {
+			holeCardVal = this.holeCard.getScore();
+		} 
+		return holeCardVal + this.getPublicScore();
 	}
 
 	this.getCardString = function() {
@@ -67,9 +56,25 @@ function Player(name) {
 		}
 		return str;
 	}
+	
+	this.getWinString = function() {
+		var winString;
+		if (this.getWins() == 0) {
+			winString = "";
+		} else if (this.getWins() == 1) {
+			winString = " (1 win)";
+		} else {
+			winString = " (" + player.getWins() + " wins)";
+		}
+		return winString;
+	}
 }
 
-function Deck(suits, values, ranks) {
+function Deck() {
+	var suits = ["\u2660", "\u2665", "\u2666", "\u2663"];
+	var ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+	var values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"];
+
 	this.cards = [];
 	
 	for (var i = 0 ; i < suits.length ; i++) {
@@ -119,19 +124,21 @@ function Game() {
 
 	this.isActive = false;
 	this.gameStage = -1;
+	this.isSetup = false;
+	this.players = [];
+	this.deck = null;
 
 	this.io = new IO();
 	
+	
 	var _this = this;
 
-	this.players = [];
-	this.deck = null;
-	
-	this.isSetup = false;
-	
 	this.setupGame = function() {
-		console.log("setup game");
 		_this.isSetup = true;
+		_this.isActive = false;
+		_this.gameStage = -1;
+		_this.timeLastDrawn = 0;
+		_this.pot = 0;
 		_this.resetDeck();
 		var numPlayers = $('#playerCount').find(":selected").val();
 		_this.setPlayers(numPlayers);
@@ -140,7 +147,6 @@ function Game() {
 	}
 	
 	this.setupRound = function() {
-		console.log("setting up round");
 		if (!_this.isSetup) {
 			_this.setupGame();	
 		}
@@ -156,7 +162,6 @@ function Game() {
 	}
 	
 	this.startRound = function() {
-		console.log("starting round");
 		_this.resetTimer();
 		_this.isActive = true;
 		_this.gameStage = 0;
@@ -166,12 +171,11 @@ function Game() {
 	
 	this.addListeners = function() {
 		$('#newPlayers').click(function() { 
-			console.log("new players");
 			_this.setupGame(); 
 		});
 		$('#startRound').click(function() { _this.setupRound(); });
 		
-		$("#board").keydown(function(e) {
+		$("#matDiv").keydown(function(e) {
 			if (_this.isActive) {
 				var p = _this.getTypedPlayer(String.fromCharCode(e.keyCode));
 				if (p != null) {
@@ -189,7 +193,7 @@ function Game() {
 	}
 	
 	this.resetDeck = function() {
-		_this.deck = new Deck(SUITS, VALUES, RANKS);
+		_this.deck = new Deck();
 		_this.deck.shuffle();
 	}
 	
@@ -229,8 +233,6 @@ function Game() {
 
 	this.getTypedPlayer = function(c) {
 		for (var i = 0 ; i < this.players.length ; i++) {
-			console.log(c);
-			console.log(KEYS[i]);
 			if (KEYS[i] == c) {
 				return _this.players[i];
 			}
@@ -259,14 +261,27 @@ function Game() {
 		var maxScore = 0;
 		for (var i = 0 ; i < _this.players.length ; i++) {
 			var p = _this.players[i];
-			console.log(p.name);
-			console.log(p.getTotalScore());
 			if (p.getTotalScore() > maxScore) {
-				maxScore = p.getTotalScore();
 				winner = p;
 			}
 		}
 		return winner;
+	}
+
+	this.getApparentWinners = function() {
+		var winners = [];
+		var maxScore = 1;
+		for (var i = 0 ; i < _this.players.length ; i++) {
+			var p = _this.players[i];
+			var score = p.getPublicScore();
+			if (score > maxScore) {
+				maxScore = score;
+				winners = [p];
+			} else if (score == maxScore) {
+				winners.push(p);	
+			}
+		}
+		return winners;
 	}
 
 	this.isGameOver = function() {
@@ -288,7 +303,7 @@ function Game() {
 			} else {
 				_this.draw();
 			}
-			$("#board").focus();
+			$("#matDiv").focus();
 		}
 	}
 
@@ -309,17 +324,10 @@ function Game() {
 	this.getPlayerDiv = function(player, color, key, x, y) {
 		var score = player.getPublicScore();
 		
-		var $div = $("<div>", {"class": "floater ephemeral"});
+		var $div = $("<div>", {"class": "game floater ephemeral"});
 		$div.addClass("floater");
 		var winString;
-		if (player.getWins() == 0) {
-			winString = "";
-		} else if (player.getWins() == 1) {
-			winString = " (1 win)";
-		} else {
-			winString = " (" + player.getWins() + " wins)";
-		}
-		$div.append("<h3>" + player.getName() + winString + "</h3>");	
+		$div.append("<h3>" + player.getName() + player.getWinString() + "</h3>");	
 		var $table = $("<table>");
 		if (player.isAlive()) {
 			$div.css("background-color", color);
@@ -331,11 +339,11 @@ function Game() {
 		$table.append("<tr><td>Draw:</td><td class='leftt'>&quot" + key + "&quot</td></tr>")
 		$table.append("<tr><td>Cards:</td><td class='leftt'>" + player.getCardString() + "</td></tr>")
 		$div.append($table);
-		
+
 		$div.click(function() {
 			if (_this.isActive) {
 				_this.dealPlayer(player);
-				_this.update();
+				_this.draw();
 			}
 		});
 		return $div;
@@ -365,14 +373,18 @@ function Game() {
 	}
 	
 	this.draw = function() {
-		console.log("drawing board");
 		$(".ephemeral").remove();
 		$("#board").append(_this.getInfoDiv());
+		var winners = _this.getApparentWinners();
+		console.log(winners);
 		for (var i = 0 ; i < this.players.length ; i++) {
 			var player = _this.players[i];
 			var color = COLORS[i];
 			var key = KEYS[i];
 			$div = _this.getPlayerDiv(player, color, key);
+			if (winners.indexOf(player) >= 0) {
+				$div.addClass("winner");	
+			}
 			_this.placePlayerDiv($div, i);
 		}
 	}
@@ -451,6 +463,6 @@ function IO() {
 }
 
 function main() {
-	var game = new Game();//numPlayers);
-	//game.start();
+	var game = new Game();
+	
 }

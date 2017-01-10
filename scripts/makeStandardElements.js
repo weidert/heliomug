@@ -1,15 +1,14 @@
 function makeSectionNav() {
   if (doesSideNavExist()) {
-    var navString = "<ul>";
+    var $navList = $("<ul>");
     $("section").each(function(index, section) {
       var title = $(section).attr("title");
       var id = "#" + $(section).attr("id");
       if (typeof title !== "undefined") {
-        navString += "<li><a href='" + id + "'>" + title + "</a></li>";
+        $navList.append("<li><a href='" + id + "'>" + title + "</a></li>");
       }
     });
-    navString += "</ul>";
-    $("#sectionNav").append(navString)
+    $("#sectionNav").append($navList)
     $("#sectionNav").addClass("vertNav");
     $("main > div").addClass("padLeft");
     $("#sectionNav").prependTo("main");
@@ -42,18 +41,17 @@ function handleWindowWidth() {
 
 function makeSiteNav() {
   if ($("#siteNav").length > 0) {
-    var navString = "<ul>";
-    navString += '<li><a href="http://heliomug.com">Home</a></li>';
-    navString += '<li><a href="http://heliomug.com/prog/java">Programs</a></li>';
-    navString += '<li><a href="http://heliomug.com/prog/visualizations">Data Vis</a></li>';
-    navString += '<li><a href="http://heliomug.com/prog/ml">Machine Learning</a></li>';
-    navString += '<li><a href="http://heliomug.com/caller/caller_description.html">Caller</a></li>';
-    navString += '<li><a href="http://heliomug.com/prog/web/fckc/">FCKC</a></li>';
-    navString += '<li><a href="http://heliomug.com/about.html">About</a></li>';
-    // navString += '<li><a href="http://craigweidert.com"><b>Resume Website</b></a></li>';
-    navString += "</ul>";
+    $navList = $("<ul>");
+    $navList.append('<li><a href="http://heliomug.com">Home</a></li>');
+    $navList.append('<li><a href="http://heliomug.com/prog/java">Programs</a></li>');
+    $navList.append('<li><a href="http://heliomug.com/prog/visualizations">Data Vis</a></li>');
+    $navList.append('<li><a href="http://heliomug.com/prog/ml">Machine Learning</a></li>');
+    $navList.append('<li><a href="http://heliomug.com/caller/caller_description.html">Caller</a></li>');
+    $navList.append('<li><a href="http://heliomug.com/prog/web/fckc/">FCKC</a></li>');
+    $navList.append('<li><a href="http://heliomug.com/about.html">About</a></li>');
+    // $navList.append('<li><a href="http://craigweidert.com"><b>Resume Website</b></a></li>');
 
-    $("#siteNav").append(navString);
+    $("#siteNav").append($navList);
     $("#siteNav").addClass("horizNav");
   }
 }
