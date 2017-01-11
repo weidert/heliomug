@@ -89,7 +89,7 @@ function makeStandardStuff() {
   makeBackToTopButton();
 
   // imports a couple of functions to customize the stuff on your website
-  $.getScript("scripts/makeMyStuff.js").done(function() {
+  $.getScript("/scripts/makeMyStuff.js").done(function() {
     makeSiteNav();
     makeFooter();
   }).fail(function( jqxhr, settings, exception ) {
