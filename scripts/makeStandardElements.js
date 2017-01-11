@@ -26,6 +26,8 @@ function isSideNavVisible() {
 }
 
 function handleWindowWidth() {
+  var amountScrolled = 150;
+  
   $("main").css("width", Math.min(900, $(window).width()));
   $("main > div").css("width", Math.min(720, $(window).width()));
   if (isSideNavVisible() && doesSideNavExist()) {
