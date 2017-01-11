@@ -29,7 +29,9 @@ function handleWindowWidth() {
   $("main").css("width", Math.min(900, $(window).width()));
   $("main > div").css("width", Math.min(720, $(window).width()));
   if (isSideNavVisible() && doesSideNavExist()) {
-    $('#topButton').fadeIn('slow');
+    if ($(window).scrollTop() > amountScrolled) {
+      $('#topButton').fadeIn('slow');
+    }
     $("#topButton").css("left", ($(window).width() - 900) / 2 + 90 - 60 / 2);
     $("#sectionNav").removeClass("hide");
     $("main > div").removeClass("cenDiv")
