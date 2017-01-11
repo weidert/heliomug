@@ -17,9 +17,11 @@ main {
 
 main > div {
     padding: 0 10px;
+    max-width: 720px;
+    margin: auto;
 }
 
-main > p, main > li {
+main div p, main div li {
     padding-left: 10px;
 }
 

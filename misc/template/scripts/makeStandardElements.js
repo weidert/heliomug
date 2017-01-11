@@ -17,7 +17,7 @@ function makeSectionNav() {
 }
 
 function doesSideNavExist() {
-  return ($("#sectionNav").length > 0);
+  return ($("nav#sectionNav").length > 0);
 }
 
 function isSideNavVisible() {
@@ -43,22 +43,17 @@ function handleWindowWidth() {
 }
 
 function makeSiteNav() {
-  if ($("#siteNav").length > 0) {
-    $navList = $("<ul>");
-    $navList.append('<li><a href="http://heliomug.com">Craig\'s Site</a></li>');
-    $navList.append('<li><a href="http://en.wikipedia.org">Wikipedia</a></li>');
-    $navList.append('<li><a href="http://google.com">Google</a></li>');
-    // $navList.append('<li><a href="http://craigweidert.com"><b>Resume Website</b></a></li>');
-
+  if ($("#siteNav").length > 0 && typeof getTopNavList == "function") {
+    $navList = getTopNavList();
     $("#siteNav").append($navList);
     $("#siteNav").addClass("horizNav");
   }
 }
 
 function makeFooter() {
-  var footerString = "<p>This page belongs to <a href='http://heliomug.com/about.html'>Craig Weidert</a></p>"
-  if ($("footer").length > 0) {
-    $("footer").append(footerString);
+  if ($("footer").length > 0 && typeof getFooterContent == "function") {
+    var $footerContent = getFooterContent();
+    $("footer").append($footerContent);
   }
 }
 
@@ -86,9 +81,25 @@ function makeBackToTopButton() {
 }
 
 function makeStandardStuff() {
+  // makes the section nav list
+  // if a nav#sectionNav exists
   makeSectionNav();
-  makeSiteNav();
-  makeFooter();
+  
+  // this function calls 
   makeBackToTopButton();
+
+  // imports a couple of functions to customize the stuff on your website
+  $.getScript("/scripts/makeMyStuff.js").done(function() {
+    makeSiteNav();
+    makeFooter();
+  }).fail(function( jqxhr, settings, exception ) {
+    console.log(jqxhr);
+    console.log(settings);
+    console.log(exception);
+  });
+
+  // this handles the section nav and "to top" button showing up 
+  // and being in the right place
+  handleWindowWidth();
   window.onresize = handleWindowWidth;
 }
