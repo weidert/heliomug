@@ -1,71 +1,64 @@
 <!doctype html>
 <html lang="en-US">
-	<head>
-		<meta charset="utf-8"/>
-		<title>Face Card Kill Card</title>
-		<link rel="stylesheet" type="text/css" href="./styles/fckc.css" media="screen" />
-		<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-	    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
-		<link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-		<script src="../../../scripts/makeStandardElements.js"></script>
-		<script src="./scripts/fckc.js"></script>
-		<script>
-			$(document).ready(function() {
-				makeStandardStuff();
-				main();
-			});
-		</script>
-	</head>
-	<body>
-		<header>
-			<h1>Face Card / Kill Card</h1>
-		</header>
-		<nav id="siteNav"></nav>
-		<main class="narrow">
-            <section title="Description" id="description">
-				<div>
-					<h2>Face Card / Kill Card</h2>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Craig Weidert">
+    <meta name="description" content="Links to some Java Jars and so on">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>Face Card Kill Card</title>
+    <link rel="stylesheet" type="text/css" href="./styles/fckc.css" media="screen" />
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script src="./scripts/fckc.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+        main();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Face Card / Kill Card</h1>
+    </header>
+    <nav id="siteNav"></nav>
+    <main class="narrow">
+      <section title="Description" id="description"><div>
+        <h2>Face Card / Kill Card</h2>
 
-					<p>Face Card Kill Card is a game that my friends and I made up while we were playing poker.  
-					</p>
-					<p>
-					Each card is worth the number shown on the card with the exception of aces, which are worth 11.  Face cards are worth nothing.  In addition to the face up cards, you have one hole card that only you know.  
-					</p>
-					<p>
-					You want to get the highest total score without drawing a face card, which eliminates you from the game.  
-					</p>
-					<p>
-					A more complete set of rules can be found <a href="http://heliomug.com/docs/articles/face_card_kill_card.pdf">here</a>.
-					</p>
-				</div>
-			</section>
-			<section title="Game" id="secGame">
-				<div>
-					<div class="game" id="matDiv" tabindex="0">
-						<div id="board">
-							<div class="game floater gameOptions" id="controlDiv">
-								<h3>Game</h3>
-								<select class="gameOptions" id="playerCount">
-									<option value="2">2 Players</option>
-									<option value="3">3 Players</option>
-									<option selected="seleted" value="4">4 Players</option>
-									<option value="5">5 Players</option>
-									<option value="6">6 Players</option>
-								</select>
-								<button class="gameOptions" id="newPlayers" type="button">New Players!</button>
-								<button class="gameOptions" id="startRound" type="button">Start Round!</button>
-							</div>
-						</div>
-						<div class="game" id="messageDiv">
-							<p id="message">asdf</p>
-							<button id="okButton" type="button">Ok!</button>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-		<footer>
-		</footer>
-	</body>
+        <p>Face Card Kill Card is a game that my friends and I made up while we were playing poker. </p>
+        <p>Each card is worth the number shown on the card with the exception of aces, which are worth 11.  Face cards are worth nothing.  In addition to the face up cards, you have one hole card that only you know.</p>
+        <p>You want to get the highest total score without drawing a face card, which eliminates you from the game.</p>
+        <p>A more complete set of rules can be found <a href="http://heliomug.com/docs/articles/face_card_kill_card.pdf">here</a>.</p>
+      </div></section>
+      
+      <section title="Game" id="secGame"><div>
+        <div class="game" id="matDiv" tabindex="0">
+          <div id="board">
+            <div class="game floater gameOptions" id="controlDiv">
+              <h3>Game</h3>
+              <select class="gameOptions" id="playerCount">
+                <option value="2">2 Players</option>
+                <option value="3">3 Players</option>
+                <option selected="seleted" value="4">4 Players</option>
+                <option value="5">5 Players</option>
+                <option value="6">6 Players</option>
+              </select>
+              <button class="gameOptions" id="newPlayers" type="button">New Players!</button>
+              <button class="gameOptions" id="startRound" type="button">Start Round!</button>
+            </div>
+          </div>
+          <div class="game" id="messageDiv">
+            <p id="message">asdf</p>
+            <button id="okButton" type="button">Ok!</button>
+          </div>
+        </div>
+      </div></section>
+    </main>
+    <footer>
+    </footer>
+  </body>
 </html>
