@@ -1,6 +1,8 @@
 function makeSectionNav() {
   if (doesSideNavExist()) {
     var $navList = $("<ul>");
+    $("header").attr("id", "top");
+    $navList.append("<li><a href='#top'>Top</a>");
     $("section").each(function(index, section) {
       var title = $(section).attr("title");
       var id = "#" + $(section).attr("id");
