@@ -16,6 +16,7 @@
     <script>
       $(document).ready(function() {
         makeStandardStuff();
+        main();
       });
     </script>
   </head>
@@ -24,17 +25,27 @@
       <h1>Face Card / Kill Card</h1>
     </header>
     <nav id="siteNav"></nav>
-    <main> 
-      <section title="Description" id="description"><div>
-        <h2>Face Card / Kill Card</h2>
-
-        <p>Face Card Kill Card is a game that my friends and I made up while we were playing poker. </p>
-        <p>Each card is worth the number shown on the card with the exception of aces, which are worth 11.  Face cards are worth nothing.  In addition to the face up cards, you have one hole card that only you know.</p>
-        <p>You want to get the highest total score without drawing a face card, which eliminates you from the game.</p>
-        <p>Here's a more complete <a href="http://heliomug.com/docs/articles/face_card_kill_card.pdf">set of rules</a>.  To play, click <a href="./face_card_kill_card.html">here</a> or click the image below.  
-        </p>
-        <div>
-            <a href="./face_card_kill_card.html"><img src="img/fckc.png"></a>
+    <main class="narrow">
+      <section title="Game" id="secGame"><div>
+        <div class="game" id="matDiv" tabindex="0">
+          <div id="board">
+            <div class="game floater gameOptions" id="controlDiv">
+              <h3>Game</h3>
+              <select class="gameOptions" id="playerCount">
+                <option value="2">2 Players</option>
+                <option value="3">3 Players</option>
+                <option selected="seleted" value="4">4 Players</option>
+                <option value="5">5 Players</option>
+                <option value="6">6 Players</option>
+              </select>
+              <button class="gameOptions" id="newPlayers" type="button">New Players!</button>
+              <button class="gameOptions" id="startRound" type="button">Start Round!</button>
+            </div>
+          </div>
+          <div class="game" id="messageDiv">
+            <p id="message">asdf</p>
+            <button id="okButton" type="button">Ok!</button>
+          </div>
         </div>
       </div></section>
     </main>
