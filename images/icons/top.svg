@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   inkscape:export-filename="/home/cweidert/Downloads/top.png"
+   inkscape:export-filename="/home/cweidert/web/heliomug.com/images/icons/top.png"
    inkscape:export-xdpi="33.825504"
    inkscape:export-ydpi="33.825504"
    sodipodi:docname="top.svg">
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="109.78001"
-     inkscape:cy="56.442992"
+     inkscape:zoom="2.8"
+     inkscape:cx="118.22439"
+     inkscape:cy="59.555499"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -61,7 +61,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -75,16 +75,14 @@
        cx="439.10715"
        cy="322.09436"
        r="77.321426"
-       style="fill:#008888;fill-opacity:0.94117647;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#008888;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:Lato;-inkscape-font-specification:Lato;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="439.10715"
        y="378.43362"
        id="text3338"
-       sodipodi:linespacing="125%"
-       inkscape:export-xdpi="33.825504"
-       inkscape:export-ydpi="33.825504"><tspan
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3340"
          x="439.10715"
