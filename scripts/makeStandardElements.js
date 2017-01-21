@@ -94,9 +94,9 @@ function makeStandardStuff() {
   // this function calls 
   makeBackToTopButton();
 
-  
   // imports a couple of functions to customize the stuff on your website
   $.getScript("/scripts/makeMyStuff.js").done(function() {
+    makeOtherStuff();
     makeSiteNav();
     makeFooter();
   }).fail(function( jqxhr, settings, exception ) {
