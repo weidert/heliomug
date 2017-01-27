@@ -1,3 +1,18 @@
+function makeOtherStuff() {
+    /*
+    var imgPath = getBaseURL() + "images/icons/heliomug_icon/heliomug16.png";
+    var linkPath = getBaseURL() + "images/icons/heliomug_icon/heliomug256.png";
+    var $title = $("header h1");
+    var $span = $("<span>");
+    $span.append("<a href='" + linkPath + "'><img src='" + imgPath + "' style='display:inline; padding-right:10px; vertical-align:middle' /></a>");
+    $span.append("heliomug.com");
+    $span.append("<a href='" + linkPath + "'><img src='" + imgPath + "' style='display:inline; padding-left:10px; vertical-align:middle' /></a>");
+    $("header").empty();
+    $("header").append($title);
+    $("header").append($span);
+    */
+}
+
 function getBaseURL () {
        return location.protocol + "//" + location.hostname + 
              (location.port && ":" + location.port) + "/";
