@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Java Projects</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Craig Weidert">
+    <meta name="description" content="Links to some Java Jars and so on">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../images/icons/heliomug.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Java Projects</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Java Projects</h2>
+        <p>
+          Here are a few Java projects that I've made.  Most of them are available as *.jar files.  You'll need the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java JRE</a> to get them to run.
+        </p>
+      </section>
+
+      <section title="Space / Tanks" id="spaceTanks">
+        <h3>Space / Tank Game</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/space.png"><img class="captioned" src="./images/space.png" alt="Space / Tank Game"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./music/space/space.jar">A space / tank game</a>.  This is a game I wrote featuring either spaceships or tanks.  It's your choice.  With a little work, you can play your friends on the internet too.  Here's a more thorough <a href="./space/index.html">description</a> of the program.     
+            </p>
+            <p>
+              The program makes use of:
+              <ul>
+                <li>Sockets / networking </li>
+                <li>Threading</li>
+                <li>Lots of functional interfaces and lambda expressions </li>
+                <li>Swing </li>
+              </ul>
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      
+      <section title="RPN Calculator" id="secRPN">
+        <h3>Reverse Polish Notation Calculator</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/rpncalc.png"><img class="captioned" src="./images/rpncalc.png" alt="Heliomug Calculator Screenshot"></a>
+          </div>
+          <div class="caption">
+              <p>
+                <a href="./rpncalc/heliomug_calculator.jar">My Reverse Polish Notation Calculator</a>.  If you don't know about it already, <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a> is great!  It lets you work quickly and is convenient for saving previous calculations and quantities for later use.  I was having trouble finding a nice implementation on one that included macros, so I decided to make one myself.   
+              </p>
+              <p>
+                It works pretty well, but it helps if you have a number pad on your computer.  It's also got macro recording capability, which is great if you have common sequences of keypresses.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Ear Trainer" id="earTrainer">
+        <h3>Ear Trainer</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/trainer.png"><img class="captioned" src="./images/trainer.png" alt="Ear Trainer Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./music/trainer/ear_trainer.jar">An ear trainer program</a>.  This is a program to help you with ear training.  The first tab is to help you identify different kinds of chords, the second tab is to help you identify chords in a given key, and the third tab is to help you identify intervals between two notes.  Here's a slightly more thorough <a href="./music/trainer/index.html">description</a> of the program.     
+            </p>
+            <p>
+              The program makes use of:
+              <ul>
+                <li>Lots of functional interfaces and lambda expressions.  </li>
+                <li>Midi music. </li>
+                <li>All kinds of GUI mumbo jumbo.</li>
+              </ul>
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Traffic Simulator" id="secTraffic">
+        <h3>Traffic Simulator</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/traffic.png"><img class="captioned" src="./images/traffic.png" alt="Traffic Simulator Screenshot"></a>
+          </div>
+          <div class="caption"><div style="width:100%">
+            <p>
+              <a href="./traffic/traffic.jar">A Traffic simulator program</a>.  There are little circular cars that pick a random destination, decide how to get there, and try to navigate through the map without hitting any other cars.  If there are too many cars, sometimes they get in a traffic jam.  The program is a little silly, but it's fun to watch. 
+            </p>
+            <p>
+              The program makes use of:
+              <ul>
+                <li>QuadTrees for collision detection / collision avoidance.</li>
+                <li>Threading to run each vehicle and each stop light</li>
+                <li>Graph algorithms for for vehicles to figure out how to get to their goals.</li>
+              </ul>
+            </p>
+          </div></div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Query Displayer" id="secGenome">
+        <h3>Genome Query Displayer</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./biod/images/results_graph.png"><img class="captioned" src="./biod/images/results_graph.png" alt="Results Graph Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              I wrote this <a href="./biod/">Genome Query Displayer</a> to read a large data file full of readings and display the results of queries on those readings.  Each reading consisted of a chromosome, start offset, end offset, and value.  My program read the raw text files with data, structured the data so that it was easy to run fast queries, then displayed the results of those queries in various ways.  I was explicitly forbidden from using databases.  
+            </p>
+            <p>
+              The program makes use of:
+              <ul>
+                <li>B-Trees to store large amounts of readings.</li>
+                <li>Lambda expressions (new in Java 8) to extract features from readings.</li>
+                <li>Swing for the GUI</li>
+                <li>Threads to load and process the data more quickly</li>
+                <li>Regular Expressions for file parsing</li>
+                <li>Abstract classes, interfaces, polymorphism, factory classes, singletons, enums, file input/output</li>
+              </ul>
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Game of Life" id="secGameOfLife">
+        <h3>Conway's Game of Life</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/gameoflife.png"><img class="captioned" src="./images/gameoflife.png" alt="Game of Life Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./gameoflife/GameOfLife.jar">My Game of Life Simulator</a>.  It's a program to run a simulation of <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>.  The game is super interesting.  You can save and load boards and so on.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Drum Machine" id="secDrumMachine">
+        <h3>Drum Machine</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/drummachine.png"><img class="captioned" src="./images/drummachine.png" alt="Drum Machine Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./drummachine/DrumMachine.jar">A little drum machine</a>.  It plays through midi output.  You can save an load loops, but I really need to add the ability to sequence loops together to make a song.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Keyboard Display" id="secKeyboard">
+        <h3>Keyboard Displayer</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/keyboard.png"><img class="captioned" src="./images/keyboard.png" alt="Keyboard Displayer Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./demos/KeyboardDisplay.jar">Keyboard displayer.</a> I made it to help my students learn how to type.  It turns out that if you can't type without looking at the keyboard, you'll make very slow progress.  Lots of my students will type a bit, make a mistake, delete a bit, try to retype what they were going for in the first place, make another mistake, etc.  The idea behind this display is that it'll stay on the screen so the students can practice not looking at their hands when they type.  It stays on top of all the windows too.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Color Demo" id="secColors">
+        <h3>Color Demo</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/colors.png"><img class="captioned" src="./images/colors.png" alt="Color Demo Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./demos/colorHexDemo.jar">Color Demo</a> to show how red, green, and blue mix to make colors on monitors, tv, the web, etc.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+
+      <section title="Number Bases" id="secNumberBases">
+        <h3>Number Base Demo</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/bases.png"><img class="captioned" src="./images/bases.png" alt="Number Base Demo Screenshot"></a>
+          </div>
+          <div class="caption">
+            <p>
+              <a href="./demos/NumberBaseDemo.jar">Number base demo</a> I made to help my students learn about different number bases.  Thinking more about, maybe I should show the numbers as graduated cylinders or something where the capacity is the base and the level is the digit.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>

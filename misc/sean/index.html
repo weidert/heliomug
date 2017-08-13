@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>!!TITLE_HERE!!</title>
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "!!DESCRIPTION_HERE!!">
+    <link rel="stylesheet" type="text/css" href="./seanStyle.css">
+    <script src="./seanNews.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        var theNews = '<marquee behavior="scroll" direction="left">';
+        var newsItems = ""
+        for (var i = 0 ; i < seanNewsItems.length ; i++) {
+          newsItems += seanNewsItems[i] + "...\t";
+        }
+        theNews += newsItems;
+        theNews += "</marquee>";
+        $("footer").append(theNews);
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Title or Whatevs</h1>
+    </header>
+
+    <br><br><br><br><br><br><br><br><br>words
+    <br><br><br><br><br><br><br><br><br>words
+    <br><br><br><br><br><br><br><br><br>words
+    <br><br><br><br><br><br><br><br><br>words
+    <br><br><br><br><br><br><br><br><br>words
+    <br><br><br><br><br><br><br><br><br>words
+    <br><br><br><br><br><br><br><br><br>words
+
+    <footer>
+    </footer>
+  </body>
+</html>

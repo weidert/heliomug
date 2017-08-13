@@ -1,0 +1,200 @@
+* {
+	font-size: 2vh; 
+	font-family: 'Lato', Sans-Serif; 
+    box-sizing: border-box;	
+}
+
+body { 
+	margin: 0 0 0 0;
+	background-color: #cef;
+	text-align: center;
+}
+
+header, footer {
+	background-color: #dfd;
+	width: 100%;
+	position: fixed;
+	padding: 1vh 1vw;
+	border: 3px solid #484;
+}
+
+header {
+	height: 7.5vh;
+	top: 0;
+}
+
+footer {
+	height: 6vh;
+	bottom: 0;
+}
+
+main {
+	text-align: center;
+	padding: 8vh 1vh 6.5vh 1vh;
+}
+
+table {
+	border: 3px solid #000;
+	border-radius: 3px;
+	border-collapse: collapse;
+	width: 100%;
+	background-color: #fff;
+	margin: auto;
+}
+
+th, td {
+	border: 1px solid #888;
+	text-align: center;
+}
+
+input[type='text'], input[type='password'], input[type='email'], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: .5em;
+}
+
+form {
+	border-radius: .5em;
+	padding: 3vw;
+	background-color: #acf;
+	width: 50vw;
+	margin: auto;
+	font-size: 3vh;
+}
+
+form a.button {
+	margin: 2vh;
+}
+
+form div {
+	padding: 1vh;
+	text-align: left;
+	font-size: 3vh;
+}
+
+a.button {
+	display: inline-block;
+	text-align: center;
+	text-decoration: none; 
+	border-radius: .25em;
+	border: 2px solid;
+	background-color: #ffd;
+	color: #000;
+	padding: .25vh .5vh;
+	font-size: 2.5vh;
+	margin: auto;
+}
+
+footer .button {
+	margin: 0vh .5vh
+}
+
+a.button.name {
+	width: 100%;
+	border-radius: 0;
+}
+
+a.button.details {
+	width: 100%;
+	border-radius: 0;
+}
+
+a.button.score {
+	line-height: 15vh;
+	font-size: 5vh;
+	width: 40vw;
+	display: block;
+	padding: .75vh;
+	border-radius: .5em;
+	width: 90%;
+	margin: 2vw auto 2vw auto;
+}
+
+#scoreButtons table {
+	border: 0;
+	background-color: transparent;
+	width: 95%;
+}
+
+#scoreButtons td {
+	border: 0;
+	text-align:center;
+}
+
+.left {
+	position: absolute;
+	left: 2vw;
+}
+
+.left * {
+	text-align: left;
+}
+
+.right {
+	position: absolute;
+	right: 2vw;
+}
+
+.right * {
+	text-align: right;
+}
+
+a:hover { 
+	background-color: #fdd; 
+}
+
+a.selected { 
+	color: #000; 
+	background-color: #fdd; 
+}
+
+div.plain {
+	background-color: #fff;
+	border: 1px solid #000;
+	text-align: left;
+}
+
+.plain table, .plain td, .plain tr {
+	width: auto;
+	margin: 0;
+	text-align:left;
+	font-size: 12pt;
+	border: 0;
+}
+
+.small {
+	font-size: 50%;
+	margin: .5vh 0 0 0;
+}
+
+.title {
+	border: 0;
+	/*color: #fff;
+	background-color: #040;
+	padding: 0 1em;*/
+	font-size: 3.5vh;
+}
+
+.cool {
+	font-size: 75%;
+	color: #0a0;
+}
+
+.notCool {
+	font-size: 75%;
+	color: #f00;
+}
+
+.heading {
+	font-weight: bold;
+	font-size: 4vh;
+	text-align: center;
+	margin: 1vh;
+}
+
+.hide { 
+	display: none; 
+}
+

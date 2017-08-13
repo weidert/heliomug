@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Student Caller</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Craig Weidert">
+    <meta name="description" content="Description for student caller at http://heliomug.com/caller">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="./../images/icons/heliomug.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="./../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Student Caller</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Student Caller</h2>
+
+        <p>
+          <a href="http://heliomug.com/caller/">Here is the link to the actual student caller</a>.  This page is just instructions / a description.
+        </p>
+        <p>
+          My student caller is a web application for calling random students in a class.  It is kind of like "equity sticks", which are popsicle sticks with student names on them.  If you call on students by drawing the sticks out of a cup, it's a lot more fair.  (I also always liked writing students' names on playing cards and doing it that way.)
+        </p>
+        <p>
+          This student caller uses HTML, CSS, Javascript, PHP, and SQL.  I made this student caller because:
+          <ul>
+            <li>I wanted some electronic equity sticks.</li>
+            <li>I wanted to learn a bit about web apps.</li>
+          </ul>
+        </p>
+      </section>
+      <section title="Welcome Screen" id="welcome">
+        <h3>Welcome Screen</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/landing.png"><img class="captioned" alt="landing page" src="images/landing.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              There is a landing page with a disclaimer on it.  It welcomes the user to use the student caller, but disclaims any warranty.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Logging In" id="login">
+        <h3>Logging In</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/login.png"><img class="captioned" src="images/login.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              There is a login page.  Right now I don't have any way to retrieve the users' passwords (they're salted and hashed anyway), nor do I have any way to e-mail users links to reset their passwords.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Class List" id="classList">
+        <h3>Class Listing</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/class_list.png"><img class="captioned" alt="login page" src="images/class_list.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              When a user logs in, they are greeted with a list of their exiting classes, if any.  This page may be reached whenever a user is logged in by clicking on the "Classes" button on the top left.  From this page, a user may make a new class by clicking on the "Make a new class" button on the bottom.
+            </p>
+            <p>
+              A user may click the the class name to see the student list for that class or click "Edit" to edit the information for the class or export the class scores.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Class Info" id="classInfo">
+        <h3>Class Info</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/class_info.png"><img class="captioned" alt="Class Info Page" src="images/class_info.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              The pages to create and edit classes are basically identical.  The user may edit the title, abbreviation, period, and subject of the class.  From this page, the user may also export the scores for that class or delete all scores for that class.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Score Export" id="scoreExport">
+        <h3>Score Export</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/score_export.png"><img class="captioned" src="images/score_export.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This page allows for the cutting and pasting of scores out of the student caller.  It's a bit crude, but workable.  This page displays the names and scores of all the students on the class as text.  Fields are separated by tabs.  Users may copy the text and paste it into any spreadsheet document and many grading programs.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Student Import" id="studentImport">
+        <h3>Class Info</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/student_import.png"><img class="captioned" alt="Student Import Page" src="images/student_import.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              Users may use this page to import students in a batch.  They must upload a text file with one student in the form "LastName, FirstName" per line.  This is often convenient for teachers because they probably already have an electronic list of their students.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Student List" id="studentList">
+        <h3>Student List</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/student_list.png"><img class="captioned" alt="Student Class List" src="images/student_list.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              The page lists the students of the class.  If the user clicks on the student name, it "calls" on that student.  If the user clicks on "Edit", they can enter the page to edit the information for that student or delete the student.  The user may also pick a randomly selected student or add students with the buttons on the bottom of the page.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Student Info" id="studentInfo">
+        <h3>Student Info</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/student_info.png"><img class="captioned" alt="Student Info Page" src="images/student_info.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              The pages for student creation (manually) and student informaiton edits are almost identical.  This page allows you to have changes to a student, reset the student's scores, or remove the student from the class entirely.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Student Calling" id="student=Picking">
+        <h3>Student Calling</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/student_call.png"><img class="captioned" alt="Student Caller Page" src="images/student_call.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This is the page that allows you to call a student and record their score.  Recording a score is, of course, optional if you don't want to stress your students out too much.
+            </p>
+            <p>
+              There are buttons to skip the student, go back to the list of students in the class, save the score to enter another, and save the score and pick a different randomly selected student.
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Thanks!" id="thanks">
+        <p>
+          Thanks for taking a look at my student caller!  <a href="http://heliomug.com/caller/">Feel free to check it out!</a>
+        </p>
+      </section>
+
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>

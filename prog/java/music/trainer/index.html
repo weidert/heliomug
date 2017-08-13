@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Ear Trainer</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Craig Weidert">
+    <meta name="description" content="A project to quiz you about chords">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../../images/icons/heliomug.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="../../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Chord Quizzer</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Overview" id="secIntroduction">
+        <h2>Summary</h2>
+        <p>
+            This is a project I worked on in January 2017.  
+            I wanted to be able to do a better job of recognizing chords, particularly on the guitar.  
+            Here is <a href="ear_trainer.jar">a link</a> to the jar.  
+        </p>
+        <p>
+            There are lots of options in the program:
+            <ul>
+                <li>Pick from over 100 instruments</li>
+                <li>Set the volume</li>
+                <li>Decide whether you want a constant root note</li>
+                <li>Decide whether you want a drone note</li>
+                <li>Decide whether you want your chords arpeggiated</li>
+                <li>Decide whether you want guitar or piano style chords</li>
+                <li>Pick the guitar strum speed</li>
+                <li>Pick the delay between two notes in an interval</li>
+            </ul>
+        </p>
+      </section>
+      <section title="Chord Type" id="typeQuiz">
+        <h3>Chord Type Quiz</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/type.png"><img class="captioned" alt="Chord Type Quizzer" src="images/type.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+                This is a tab to help you identify what type of chords you are playing.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Key Chord" id="keyQuiz">
+        <h3>Key Chord Quiz</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/key.png"><img class="captioned" alt="Key Chord Quizzer" src="images/key.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+                This is a tab to help you identify different chords in a given key.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Intervals" id="intervalQuiz">
+        <h3>Interval Quiz</h3>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/interval.png"><img class="captioned" alt="Interval Quizzer" src="images/interval.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+                This is a tab to help you identify the interval between two notes.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Concepts Used" id="progInfo">
+        <h3>Programming Concepts Used</h3>
+        <ul>
+          <li> 
+            I used Java's Swing package and all its goodies to make the GUI.  
+          </li>
+          <li>
+            I used threads have the notes turn off with some delayed action.  
+          </li>
+          <li>
+            I used a ton of lambda expressions all over the place.  
+          </li>
+        </ul>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>

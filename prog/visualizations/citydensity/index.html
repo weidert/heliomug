@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Density Visualizations</title>
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "Visualizations Comparing Density of US Metropolitan Areas">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Density Visualizations</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Population Profiles of the Most Populous Metropolitan Areas in the USA</h2>
+        <p>
+          The plot below shows where the people in the 20 largest metropolitan areas live in relation to the city center. Height corresponds to density and volume corresponds to population.
+        </p>
+      </section>
+      <section title="Illustration" id="secIllustration">
+        <a href="img/city_density_profiles.png">
+          <img class="cenImg" src="img/city_density_profiles_640.png" alt="City Density Profiles" height="598" width="640">
+        </a>
+
+        <p>
+          Each ring represents a 4 kilometer wide ring around the city.  Partial rings indicate area surrounding the city that is not part of the United States.  This is generally either due to the center of the city being near a large body of water (Chicago, San Francisco, Seattle, San Diego, etc), or being near an international border (Detroit, San Deigo).
+        </p>
+      </section>
+      <section title="Motivation" id="secMotivation">
+        <h3>Motivation</h3>
+
+        <p>
+          If I'm being honest, this visualization is largely motivated by animus directed towards Los Angeles, where I live.  Los Angeles takes a lot of flak for allegedly being a sprawling, sparesly populated urban wasteland.  As I will explain below, it's actually fairly dense.
+        </p>
+      </section>
+      <section title="Sources" id="secSources">
+        <h3>Sources</h3>
+
+        <ul>
+          <li><a href="https://blog.splitwise.com/2013/09/18/the-2010-us-census-population-by-zip-code-totally-free/">Free zip code population tables</a></li>
+          <li><a href="https://www.census.gov/geo/maps-data/data/tiger-line.html">Census Shape Files</a></li>
+        </ul>
+      </section>
+      <section title="Assumptions" id="secAssumptions">
+        <h3>Assumptions</h3>
+
+        <ul>
+          <li>
+            In each city, city hall is assumed to be in the center of the city and all distances are measured from city hall.  Though city hall is often near the most dense part of the city, but not always.  For instance, in Los Angeles, most of the densest parts of the metropolitan area are well west of the city hall.  This may mayke some cities look less dense than they would if we found a better center.
+          </li>
+          <li>
+            In this plot, everyone in a particular zip code was assumed to be living on a point in the center of the zip code.  I made this assumption out of necessity; the data set I had at the time had only a list of zip codes and populations.  It would be better to use a more granular set of data, such as the set of census tracts or census blocks.
+          </li>
+        </ul>
+      </section>
+      <section title="Process" id="secProcess">
+        <h3>Process</h3>
+
+        <ul>
+          <li>
+            I used Java to parse, process, and write csv.  I've since seen how easy it is with Python, so I'd probably do that if I had to start over.
+          </li>
+          <li>
+            For each city, after I had all the zip codes sorted by distance from city hall, I dumped them in 4km wide bins.  These bins I dumped back out to csv.  I imported that data directed into Tableau for the visualization below.
+          </li>
+          <li>
+            I wrote a program from scratch in Java to make 3D cylindrical shells based on the density and render them.  It's not perfect; some of the surfaces are covered by surfaces behind them.  It gets the point across though.  The images are also a little big choppy.  In the future, I'd probably look harder for someone else's package to use.
+          </li>
+        </ul>
+      </section>
+      <section title="Problems" id="secProblems">
+        <h3>Problems</h3>
+        <ul>
+          <li>
+              People from zip codes that should have been spread across more than one ring maybe have been dumped into one particular ring instead.  This fact caused some continuity issues.  For instance, even though Phoenix is nowhere near any bodies of water, there are some rings that just happen to have no zip codes located within them and so are very partial.
+          </li>
+        </ul>
+      </section>
+      <section title="Conclusion" id="secConclusions">
+        <h3>Conclusions</h3>
+        <p>
+          I admit that the city is far from perfect, but I want to drive home a few points:
+        </p>
+        <ul>
+          <li>In most metropolitan areas in the United States, the reality is that most people who live in a metropolitan area don't live near the city center.  Thus, even if the center of the city is dense, that may not have a lot of bearing on most of the residents in that metro area.  </li>
+          <li>Despite its reputation, central Los Angeles really is fairly dense.  </li>
+          <li>As far as outskirts in the United States go, the "outskirts" of Los Angeles are quite dense.  As far as I can tell, this is primarily due two reasons:
+          <ul>
+            <li>Los Angeles really is very multi-centric.  Within 25 miles of downtown Los Angeles are Santa Monica, Long Beach, Pasadena, and numerous other smaller urban centers.  </li>
+            <li>We've filled the entire Los Angeles basin with city and we've nowhere to go but up / in.</li>
+          </ul>
+          </li>
+        </ul>
+        <p>
+          Interestingly, central Los Angeles (roughly bounded by the 10 Freeway, the Los Angeles River, La Cienega Boulevard, and the foothills of the Santa Monica Mountains) is smaller than the city of San Francisco, yet has essentially the same population.
+        </p>
+      </section>
+      <section title="Tableau Vis" id="secTableau">
+        <h3>Tableau Visualization</h3>
+
+        <p>
+          The Tableau visualization below inclues data from the fifty largest metropolitan areas in the United States.
+        </p>
+        <div style="margin:auto; position:relative" class='tableauPlaceholder' id='viz1474953203693'>
+          <noscript>
+            <a href='#'>
+              <img alt='Where Do People in Metropolitan Areas Live with Respect to City Hall?   ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Di&#47;DistancefromCityHall&#47;Dashboard1&#47;1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='DistancefromCityHall&#47;Dashboard1' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Di&#47;DistancefromCityHall&#47;Dashboard1&#47;1.png' /> 
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+          </object>
+        </div>                
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1474953203693');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.minWidth='604px';
+          vizElement.style.maxWidth='100%';
+          vizElement.style.minHeight='789px';
+          vizElement.style.maxHeight=(divElement.offsetWidth*0.75)+'px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>

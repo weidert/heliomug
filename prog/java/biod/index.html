@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Genome Data Visualizer</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Craig Weidert">
+    <meta name="description" content="A project to visualize hits for genome probes">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Genome Data Visualizer</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Overview" id="secIntroduction">
+        <h2>Summary</h2>
+        <p>
+          This is a project I was working on in November 2016.  It's to visualize readings from individual genomes.  The idea is that each reading has a start point, an end point, and a value, which indicates the strength of a match between the start and end point.  I was tasked with structuring the data in such a way that a user could perform fast queries on the data and display the results.  A typical query might be something like "I want to select all the readings between chromosome 1 offset 1,000,000 and chromosome 2 offset 500,000."  
+        </p>
+        <p>
+          This program was only ever run on a toy dataset with approximately 2.9 million readings.  In real life the dataset would be much larger.  I was explicitly forbidden from using databases.  
+        </p>
+      </section>
+      <section title="Text Display" id="textDisplay">
+        <h3>Results Text Display</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/results_text.png"><img class="captioned" src="images/results_text.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This tab simply displays the results in a long text form.  This text may be saved to file.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Graph Display" id="graphDisplay">
+        <h3>Results Graph Display</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/results_graph.png"><img class="captioned" src="images/results_graph.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This tab displays measures about the results as a graph.  You can pick which measures for the data you want to display (start, end, length, value) and how to display them (on the x-axis, on the y-axis, or via color).  The picture may be saved to file.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Stats Display" id="statsDisplay">
+        <h3>Results Graph Display</h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="images/results_stats.png"><img class="captioned" src="images/results_stats.png"></a>
+          </div>
+          <div class="caption">
+            <p>
+              This tab displays statistics for one measure of the results.  Summary statistics are shown and a histogram is displayed for whichever measure for the results you select (start, end, length, value).  This histogram and the accompanying summary statistics may be saved to file.  
+            </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Concepts Used" id="progInfo">
+        <h3>Programming Concepts Used</h3>
+        <ul>
+          <li>
+            I used lambda selections to extract the various measures from the readings in the results.  
+          </li>
+          <li> 
+            I used Java's Swing package to make the GUI.  
+          </li>
+          <li>
+            Because I was forbidden from using any kind of database, I wrote a B-Tree to store the data in some sorted form.  I somewhat arbitrarily chose each node to have a maximum of 1,024 readings.  Each node would be saved to the disk for quick future loading.  
+          </li>
+          <li>
+            I used threads to read the data file and build the tree structure.  
+          </li>
+          <li>
+            I used enums, regular expressions, interval trees, interfaces, abstract classes, polymorphism, affine transforms, singletons, factory classes, and functional interfaces.  
+          </li>
+        </ul>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Commuter Map</title>
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "A map of commuter origins and destinations in LA County">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <script type="text/javascript" src="scripts/tracts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBIWsfuV8ADzuBaYMbaPNaPJLJj3mHv5tM"></script>
+    <script type="text/javascript" src="scripts/mapUtils.js"></script>
+    <script type="text/javascript" src="scripts/mapFunctions.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+		    initMap();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's LA Commuter Map</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Los Angeles County Commute Origin-Destination Map</h2>
+        <p>
+          I was working on this during September 1-7, 2016.  This map shows commuting origins (homes) and destinations (jobs) in Los Angeles County.  Commutes are counted per census tract.  There is also a <a href="full_screen.html">fuller screen version</a>.  
+        </p>
+
+		    <div id="map_canvas" style="width: 100%; height: 500px;"></div>
+
+        <p>
+        The brighter the red, the more commuter destinations (jobs, roughly) per unit of area.
+        The brighter the green, the more commuter origins (homes, roughly) per unit of area.  Red and green make yellow, so bright yellow means lots of both origins and destinations.
+        </p>
+      </section>
+      <section title="Motivation" id="secMotivation">
+        <h3>Motivation</h3>
+
+        <p>
+          Originally I wanted to make a transit desert map.  The idea was that I would find all the commutes in LA county, ask Google how long they took on transit, then make a map about which areas had the worst transit commutes.  However, there are about 1,000,000 origin-destination pairs, which is too many to ask Google about.
+        </p>
+        <p>
+          I thought that maybe I could compute the transit commute durations myself.  I had hoped to run a graph distance algorithm to get the travel times between different locations.  I ended up looking at LA Metro's GTFS (General Transit Feed Specification) files and did end up loading all the ~11,000 transit stop locations into a searchable graph.  That was pretty fun and successful.  However, when I tried to load all of the ~3,000,000 daily individual times that buses / trains stop throughout the day through the system, my computer crashed.  Maybe I'll try to make the graph structure more lightweight and try it again in the future...
+        </p>
+        <p>
+          I ended up setting for a map of just the sum totals of origins and destinations per tract, which was pretty low hanging fruit.
+        </p>
+      </section>
+      <section title="Resources" id="secSources">
+        <h3>Resources</h3>
+
+        <ul>
+          <li>
+            The <a href="http://developer.metro.net/">LA Metro</a> site has nice stuff, including scheules, real time data, GIS data, etc.
+          </li>
+          <li>
+            The <a href="http://www.census.gov/">US Census Site</a> has all kinds of information, including:
+            <ul>
+              <li><a href="https://www.census.gov/geo/maps-data/data/tiger-line.html">2010 Census tract shape files</a></li>
+              <li><a href="http://lehd.ces.census.gov/data/">Commuting Data</a></li>
+            </ul>
+          </li>
+          <li>
+            I used <a href="http://www.qgis.org/en/site/">QGIS</a>, a free GIS program, to convert the shape files to geojson files, which are much easier for me to inspect and parse.
+          </li>
+        </ul>
+      </section>
+      <section title="Assumptions" id="secAssumptions">
+        <h3>Assumptions / Simplifications</h3>
+        <ul>
+          <li>
+            I used to dump non-contiguous tracts and cross-country trips (e.g. from LA County to Orange County), but I have since fixed that.  
+          </li>
+        </ul>
+      </section>
+      <section title="Process" id="secProcess">
+        <h3>Process</h3>
+
+        <ul>
+          <li>
+            I opened the *.shp file with QGIS and dumped it to *.geojson so it'd be a little easier to parse.
+          </li>
+          <li>
+            I got the commuter files from the census site.  I used grep to filter out the origin-destination with at least one end in LA County (06037), then used python to sum the trips up per tract.
+          </li>
+          <li>
+            I used Python to load the shapes, areas, and commuter info into a dictionary.  I then used the json Python library to dump that dictionary to a file.
+          </li>
+          <li>
+            I wrote some Javascript files to open the json file with the tract information, make some captions, and put the shapes on a Google map.
+          </li>
+        </ul>
+      </section>
+      <section title="Future Work" id="secProblems">
+        <h3>Future Work</h3>
+
+        <ul>
+          <li>
+            I capped the density coloring at 3000 commutes per square kilometer.  That is, the colors don't get any more intense if the density rises above 3000 commutes per km^2.  It would be nice to come up with some kind of responsive coloring scheme based on the maximum density in the screen or data set.  
+          </li>
+          <li>
+		The file containing the tract information is large (~10MB).  It would be good to load it dynamicallly with AJAX or something similar to reduce load times.  	
+          </li>
+          <li>
+            I'd like to load files for all counties and load them on the fly based on which states and counties you zoomed in on.
+          </li>
+          <li>
+            Obviously, I'd like to take transit routes into account, as noted above.  I'll have to make my graph more lightweight so that I can actually load them all.  Or, alternately, I'll have to figure out how to run graph algorithms on graphs that don't fit into memory.
+          </li>
+        </ul>
+      </section>
+      <section title="Conclusion" id="secConclusions">
+        <h3>Conclusions</h3>
+
+        <p>
+          The map turned out more or less how I expected it to.  It really helps show where the jobs and homes are.  Some highlights:
+          <ul>
+            <li>
+              There is a large concentration of both jobs and homes in the so-called <a href="http://dornsife.usc.edu/assets/sites/1/docs/news_events/2012/Krueger_WilshireSantaMonicaCorridor_Poster.pdf">Wilshire-Santa Monica Corridor</a>, as both experience and authority would tell me.
+            </li>
+            <li>
+              You can really see the industrial zones to the southeast of downtown Los Angeles and down south of LAX.  Interestingly, Hancock Park, which has a reputation for being a residential neighborhood, is very red because there are a lot of busineses, but really not that many residents.  The houses just take up a lot of area.  
+            </li>
+            <li>
+              The mountains really come out strongly in black.
+            </li>
+          </ul>
+        </p>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>

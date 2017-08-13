@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Craig's Space / Tank Game</title>
+    <meta charset="UTF-8">
+    <meta name = "author" content = "Craig Weidert">
+    <meta name = "description" content = "An internet-enabled tank / space game">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../../styles/default_style.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/icons/heliomug.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="../../../scripts/makeStandardElements.js"></script>
+    <script>
+      $(document).ready(function() {
+        makeStandardStuff();
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Craig's Space / Tank Game</h1>
+    </header>
+
+    <nav id="siteNav"></nav>
+    <nav id="sectionNav"></nav>
+
+    <main><div>
+      <section title="Introduction" id="secIntroduction">
+        <h2>Introduction</h2>
+        <p>
+          I was working on this <a href="./space.jar">space / tank game</a>
+          during late January / early February 2017.  If you're feeling
+          agressive, you can try to shoot each other, but it's oftentimes just
+          as fun to just fly around the screen.  You'll need the <a
+          href="https://www.google.com/search?q=java%20jre%20download">Java JRE
+          version 8+</a> to get it to run.  The source code is available at <a
+          href="http://github.com/cweidert/space_skirmish">github.com</a>.
+        </p>
+      </section>
+      <section title="Motivation" id="secMotivation">
+        <h3>Motivation</h3>
+
+        <p>
+            The main reason I wanted to work on this project was so that I
+            could try out some networking.  I had made a couple of pretty
+            similar games in the past, but hadn't ever gotten two computers to
+            talk to each other in any meaningful way.  
+        </p>
+      </section>
+      <section title="Features" id="secFeatures">
+        <h3>Features / Description </h3>
+
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/space.png"><img class="captioned" src="./images/space.png" alt="Space Shot"></a>
+          </div>
+          <div class="caption">
+              <p>
+                In one mode of the game, you can fly around as a spaceship.  If
+                the planet and gravity are enabled, then it's fun to try to put
+                your ship in and out of orbit.  Or it's also fun to try to use
+                your ship's gravity to tug the other ships around the screen.
+                In any case, I feel that if you play you'll learn a lot about
+                inertia.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/tanks.png"><img class="captioned" src="./images/tanks.png" alt="Tank Shot"></a>
+          </div>
+          <div class="caption">
+              <p>
+                In the other mode of the game, you can play as a tank driving
+                around the screen.  In pratical terms, this means that there is
+                no inertia, no gravitational attraction, and the ships are
+                rendered differently.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/flower_pic.png"><img class="captioned" src="./images/flower_pic.png" alt="Synchronized space swimming"></a>
+          </div>
+          <div class="caption">
+              <p>
+                If you play where all the players have the same exact key
+                assignments it can be kind of fun because you can make the
+                ships to pretty intricate "synchronized swimming" routines.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/boundary.png"><img class="captioned" src="./images/boundary.png" alt="Boundary"></a>
+          </div>
+          <div class="caption">
+              <p>
+                If you enable the "safe zone" option and your ship / tank
+                leaves the safe zone, then your ship / tank will only survive
+                for a little while.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/welcome.png"><img class="captioned" src="./images/welcome.png" alt="Landing screen"></a>
+          </div>
+          <div class="caption">
+              <p>
+                The landing screen lets you select basic parameters about the
+                game you'd like to play.  After you hit "Play!", you are taken
+                to an already running instance of the game.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/players.png"><img class="captioned" src="./images/players.png" alt="Players screen"></a>
+          </div>
+          <div class="caption">
+              <p>
+                The players screen lets you edit the players for the game.  You
+                can change the buttons for each player or add new players with
+                different colors and names.  If you are running a game over the
+                internet, you can boot out external players too.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/settings.png"><img class="captioned" src="./images/settings.png" alt="Settings Screen"></a>
+          </div>
+          <div class="caption">
+              <p>
+                This screen lets you make edits to the game's settings.  You
+                can put a lifespan on the bullets, edit the "safe zone"
+                settings (see below), tweak gravity settings, make the screen
+                wrap-around, and a few other things.  I'd like to add more
+                options to this screen in the future.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+        <div class="picAndCap">
+          <div class="capPic">
+            <a href="./images/internet.png"><img class="captioned" src="./images/internet.png" alt="Synchronized space swimming"></a>
+          </div>
+          <div class="caption">
+              <p>
+                Using the internet screen, you can host a game on the internet
+                so that other people can join.  In order to see other games in
+                the world at large, I must be running my server to host game
+                lists at my house.  However, you should always be able to see
+                games in your lan.  And in the worst case, you can type in your
+                friend's ip address and port number manually.  I order to host
+                a game, you must open up a port on your router so that
+                connections can find their way to your computer.  This is a
+                disadvantage.  
+              </p>
+          </div>
+        </div><div style="clear:both"></div>
+      </section>
+      <section title="Tools" id="secSources">
+        <h3>Tools</h3>
+
+        <p>
+            The main new tool that I used was sockets.  It was a little bit
+            tricky because I needed the connection to be two-way.  The way the
+            process works when you are playing online, there is one master
+            computer that hosts the game.  That computer handles all the
+            physics, collisions, etc of the game and send updated versions of
+            the game out to any connected computers, which should be listening
+            for updates.  Those connected computers can also send requests like
+            "turn the booster off for the ship of player 2".  The master
+            computer listens for these requests and implements them as they
+            come in.  
+        </p>
+        <p>
+          I also used a lot of things I usually use for these kinds of
+          projects: Swing, threads, functional interfaces, lambda expressions,
+          graphics, etc etc.  
+        </p>
+      </section>
+      <section title="Future Work" id="secProblems">
+        <h3>Future Work / Improvements</h3>
+
+        <ul>
+          <li>
+            Gameplay suffers massively when the two computers playing the same
+            game online are far apart / have latency issues.  A way I could fix
+            this is by having each computer be in charge of its local players'
+            own positions and reporting those positions back to the master
+            computer, rather than having the computers send requests to move
+            back to the master computer.  This should be fairly feasible, but I
+            don't have time to fix it right now.  
+          </li>
+          <li>
+            The user interface is still somewhat janky and if I had unlimited
+            time, I'd like to clean it up somewhat.  
+          </li>
+          <li>
+            I'd like to make a point-of-view mode where you are playing from an
+            individual ship's point of view.  
+          </li>
+        </ul>
+      </section>
+      <section title="Conclusion" id="secConclusions">
+        <h3>Conclusions</h3>
+
+        <p>
+          This game was pretty fun to write and I'm fairly satisfied with how
+          it turned out.  Though I was motivated to start it mainly to work on
+          sockets / internet connections, I did actually spend most of my time
+          writing code that had nothing to do with that.  Nonetheless, I did
+          learn about some socket / internet stuff and am glad I worked on this
+          project.  
+        </p>
+      </section>
+    </div></main>
+
+    <footer></footer>
+  </body>
+</html>
